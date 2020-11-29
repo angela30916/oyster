@@ -8,21 +8,13 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"]
+    },
+    "globals": {
+        "d3": "writable",
+        "topojson": "writable",
+        "versor": "writable"
     }
 }

@@ -1,0 +1,49 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: inline-block;
+    position: fixed;
+    padding-top: 10px;
+    width: 100%;
+    height: 20px;
+    background-color: #003d5b;
+    color: #eee;
+}
+
+svg {
+    display: inline-block;
+}
+
+span {
+    color: #edae49;
+}
+
+.infoBox {
+    display: inline-block;
+    position: fixed;
+    top: 50px;
+    left: 20px;
+    width: 300px;
+    height: 700px;
+    background-color: #00798c;
+    color: #eee;
+    overflow: scroll;
+}
+
+.area img {
+    width: 25px;
+}
+
+.area {
+    display: flex;
+    justify-content: left;
+}
+.hidden {
+    display: none;
+}
