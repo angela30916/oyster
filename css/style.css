@@ -30,20 +30,19 @@ span {
     top: 50px;
     left: 20px;
     width: 300px;
-    height: 700px;
+    height: 85%;
     background-color: #00798c;
     color: #eee;
-    overflow: scroll;
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
-.area img {
-    width: 25px;
-}
-
-.area {
-    display: flex;
-    justify-content: left;
-}
-.hidden {
-    display: none;
+.topic > span {
+    color: #444;
+    font-weight: bolder;
+    border: 1px solid;
+    padding: 1px 3px;
 }

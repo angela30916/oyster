@@ -11,79 +11,127 @@
         <header>Welcome to OYSTER！</header>
         <svg></svg>
         <div class="infoBox">
-            <div>
-                <h3>Taiwan</h3>
-                <h4>Capital: <span>Taipei</span></h4>
-                <div>
-                    Geography
-                    <div class="area">
-                        Area: <span>35,980 sq km</span
-                        ><img class="areaBtn" src="images/arrow-down.svg" />
-                    </div>
-                    <div class="hidden">
-                        <div>Land: <span>32,260 sq km</span></div>
-                        <div>Water: <span>3,720 sq km</span></div>
-                    </div>
-
-                    <div>Coastline: <span>1,566.3 km</span></div>
-                    <div>Highest Point: <span>Yu Shan 3,952 m</span></div>
+            <div class="country" style="display: none">
+                <h3 id="name"></h3>
+                <h4>Capital: <span id="capital"></span></h4>
+                <div class="topic">
+                    <span>Geography</span>
+                    <div>Area: <span id="area"></span></div>
+                    <div>Coastline: <span id="coastline"></span></div>
+                    <div>Highest Point: <span id="highest"></span></div>
                     <div>
                         Climate:
-                        <span
-                            >tropical; marine; rainy season during southwest
-                            monsoon (June to August); persistent and extensive
-                            cloudiness all year</span
-                        >
+                        <span id="climate"></span>
                     </div>
                 </div>
                 <br />
-                <div>
-                    People
+                <div class="topic">
+                    <span>People</span>
                     <div>
-                        Population: <span>23,603,049 (July 2020 est.)</span>
+                        Population:
+                        <span id="population"></span>
                     </div>
-                    <div>Ethnic groups: <span>Han Chinese</span></div>
+                    <div>Ethnic groups: <span id="ethnic"></span></div>
                     <div>
                         Languages:
-                        <span
-                            >Mandarin Chinese (official), Taiwanese (Min Nan),
-                            Hakka dialects, approximately 16 indigenous
-                            languages</span
-                        >
+                        <span id="language"></span>
                     </div>
                     <div>
                         Religions:
-                        <span
-                            >Buddhist 35.3%, Taoist 33.2%, Christian 3.9%, folk
-                            (includes Confucian) approximately 10%, none or
-                            unspecified 18.2% (2005 est.)</span
-                        >
+                        <span id="religion"></span>
                     </div>
                     <div>
                         Urbanization:
-                        <span>78.9% of total population (2020)</span>
+                        <span id="urban"></span>
                     </div>
-                    <br />
+                </div>
+                <br />
+                <div class="topic">
+                    <span>Economy</span>
                     <div>
-                        Economy
-                        <div>
-                            Real GDP: <span>$1.189 trillion (2017 est.)</span>
-                        </div>
-                        <div>Unemployment: 3.8% (2017 est.)<span></span></div>
-                        <div>
-                            Currency: <span>New Taiwan dollars (TWD)</span>
-                        </div>
-                        <div>
-                            Trade Balance:
-                            <span>$82.88 billion (2017 est.)</span>
-                        </div>
+                        Real GDP:
+                        <span id="GDP"></span>
                     </div>
-                    <br />
                     <div>
-                        Communication:
-                        <div>Time Zone: <span>UTC+8</span></div>
-                        <div>Telephones: <span>886</span></div>
-                        <div>Internet: <span>.tw</span></div>
+                        Unemployment:
+                        <span id="unemployment"></span>
+                    </div>
+                    <div>
+                        Currency:
+                        <span id="currency"></span>
+                    </div>
+                    <div>
+                        Trade Balance:
+                        <span id="trade"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="topic">
+                    <span>Communication</span>
+                    <div>Time Zone: <span id="time"></span></div>
+                    <div>Telephones: <span id="tele"></span></div>
+                    <div>Internet: <span id="net"></span></div>
+                </div>
+            </div>
+            <div class="globe">
+                <h3 id="name">Earth</h3>
+                <div class="topic">
+                    <span>Geography</span>
+                    <div>Surface: <span>510.072 million sq km</span></div>
+                    <div>
+                        Land: <span>148.94 million sq km</span
+                        ><span style="font-size: small; color: darkgray">
+                            29.1%</span
+                        >
+                    </div>
+                    <div>
+                        Water: <span>361.132 million sq km</span
+                        ><span style="font-size: small; color: darkgray">
+                            70.9%</span
+                        >
+                    </div>
+                    <div>Coastline: <span>356,000 km</span></div>
+                    <div>
+                        Highest Point:
+                        <span
+                            >Mount Everest
+                            <span>8,848 m (China-Nepal)</span></span
+                        >
+                    </div>
+                    <div>
+                        Lowest Point:
+                        <span>Mariana Trench <span>-10,924 m</span></span>
+                    </div>
+                    <div>Average Elevation: <span>840 m</span></div>
+                </div>
+                <div class="topic">
+                    <span>People</span>
+                    <div>
+                        Population: <span>7,684,292,383 (July 2020 est.)</span>
+                    </div>
+                    <div>
+                        Urbanization:
+                        <span>56.2% of total population (2020)</span>
+                    </div>
+                    <div>
+                        Largest City:
+                        <span
+                            >Tokyo (Japan) - 37,393,000; New Delhi (India) -
+                            30,291,000; Shanghai (China) - 27,058,000; Sao Paulo
+                            (Brazil) - 22,043,000; Mexico City (Mexico) -
+                            21,782,000; Dhaka (Bangladesh) - 21,006,000; Cairo
+                            (Egypt) - 20,901,000; Beijing (China) - 20,463,000;
+                            Mumbai (India) - 20,411,000; Osaka (Japan) -
+                            19,165,000 (2020)</span
+                        >
+                    </div>
+                    <div>
+                        Religion:
+                        <span
+                            >Christian 31.2%, Muslim 24.1%, Hindu 15.1%,
+                            Buddhist 6.9%, folk religions 5.7%, Jewish 0.2%,
+                            other 0.8%, unaffiliated 16% (2015 est.)</span
+                        >
                     </div>
                 </div>
             </div>
