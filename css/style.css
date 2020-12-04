@@ -24,6 +24,44 @@ span {
     color: #edae49;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.signIn {
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.signIn:hover {
+    cursor: pointer;
+}
+
+.signBox {
+    display: inline-block;
+    /* display: none; */
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    width: 300px;
+    height: 50%;
+    z-index: 100;
+    border: 1px solid #eee;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
 .infoBox {
     display: inline-block;
     position: fixed;

@@ -8,9 +8,24 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
-        <header>Welcome to OYSTER！</header>
+        <header>
+            <div class="logo"><a href="./">Welcome to OYSTER！</a></div>
+            <div class="signIn"><a>Sign-In</a></div>
+        </header>
         <svg></svg>
+        <div class="signBox"></div>
         <div class="infoBox">
+            <form>
+                <div>
+                    <label for="search">搜尋</label
+                    ><input
+                        type="text"
+                        id="search"
+                        placeholder="想去哪兒？"
+                        onClick="this.select();"
+                    /><input id="submit" type="submit" value="Search" />
+                </div>
+            </form>
             <div class="country" style="display: none">
                 <h3 id="name"></h3>
                 <h4>Capital: <span id="capital"></span></h4>
@@ -104,6 +119,7 @@
                     </div>
                     <div>Average Elevation: <span>840 m</span></div>
                 </div>
+                <br />
                 <div class="topic">
                     <span>People</span>
                     <div>
@@ -136,6 +152,29 @@
                 </div>
             </div>
         </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            var firebaseConfig = {
+                apiKey: 'AIzaSyB_u7VRtuCAfVSIBhwYcYLJwiZBJpH9-qo',
+                authDomain: 'oyster-anping.firebaseapp.com',
+                projectId: 'oyster-anping',
+                storageBucket: 'oyster-anping.appspot.com',
+                messagingSenderId: '473930989738',
+                appId: '1:473930989738:web:cd62ac993e7f1b875950d3',
+                measurementId: 'G-SV32B0XW6R',
+            }
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig)
+            firebase.analytics()
+        </script>
         <script src="https://d3js.org/d3.v6.js"></script>
         <script src="https://unpkg.com/topojson@3"></script>
         <script src="https://unpkg.com/versor"></script>

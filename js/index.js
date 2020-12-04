@@ -28,6 +28,7 @@ function render(land) {
             .data(topojson.feature(world, world.objects.countries).features)
             .join('path')
             .on('click', clicked)
+            // .call(() => searchCountry())
             .attr('d', path)
 
         countries.append('title').text((d) => d.properties.name)
@@ -149,7 +150,27 @@ function dragged(event) {
 const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', zoomed)
 const drag = d3.drag().on('start', dragstarted).on('drag', dragged)
 
-// ANCHOR
+let ids = [
+    'name',
+    'capital',
+    'area',
+    'coastline',
+    'highest',
+    'climate',
+    'population',
+    'ethnic',
+    'language',
+    'religion',
+    'urban',
+    'GDP',
+    'unemployment',
+    'currency',
+    'trade',
+    'time',
+    'tele',
+    'net',
+]
+
 function getCountryInfo(code, continent, name) {
     fetch(
         `https://raw.githubusercontent.com/factbook/factbook.json/master/${continent}/${code}.json`
@@ -158,59 +179,82 @@ function getCountryInfo(code, continent, name) {
         .then((countryInfo) => {
             globe.style.display = 'none'
             country.style.display = 'block'
-            document.getElementById('name').textContent = name
-            document.getElementById('capital').textContent =
-                countryInfo.Government.Capital.name.text
-            document.getElementById('area').textContent =
-                countryInfo.Geography.Area.total.text
-            document.getElementById('coastline').textContent =
-                countryInfo.Geography.Coastline.text
-            document.getElementById('highest').textContent =
-                countryInfo.Geography.Elevation['highest point'].text
-            document.getElementById('climate').textContent =
-                countryInfo.Geography.Climate.text
-            document.getElementById('population').textContent =
-                countryInfo['People and Society'].Population.text
-            document.getElementById('ethnic').textContent =
-                countryInfo['People and Society']['Ethnic groups'].text
-            document.getElementById('language').textContent =
-                countryInfo['People and Society'].Languages.text
-            document.getElementById('religion').textContent =
-                countryInfo['People and Society'].Religions.text
-            document.getElementById('urban').textContent =
-                countryInfo['People and Society'].Urbanization[
+            reset()
+
+            let contentList = [
+                name,
+                countryInfo.Government?.Capital?.name?.text ?? 'null',
+                countryInfo.Geography?.Area?.total?.text ?? 'null',
+                countryInfo.Geography?.Coastline?.text ?? 'null',
+                countryInfo.Geography?.Elevation?.['highest point']?.text ??
+                    'null',
+                countryInfo.Geography?.Climate?.text ?? 'null',
+                countryInfo['People and Society']?.Population?.text ?? 'null',
+                countryInfo['People and Society']?.['Ethnic groups']?.text ??
+                    'null',
+                countryInfo['People and Society']?.Languages?.text ?? 'null',
+                countryInfo['People and Society']?.Religions?.text ?? 'null',
+                countryInfo['People and Society']?.Urbanization?.[
                     'urban population'
-                ].text
-            document.getElementById('GDP').textContent = countryInfo.Economy[
-                'GDP (purchasing power parity)'
-            ].text.split('/')[0]
-            document.getElementById(
-                'unemployment'
-            ).textContent = countryInfo.Economy['Unemployment rate'].text.split(
-                '/'
-            )[0]
-            document.getElementById(
-                'currency'
-            ).textContent = countryInfo.Economy['Exchange rates'].text.split(
-                ' per'
-            )[0]
-            document.getElementById('trade').textContent = countryInfo.Economy[
-                'Current account balance'
-            ].text.split(' /')[0]
-            document.getElementById(
-                'time'
-            ).textContent = countryInfo.Government.Capital[
-                'time difference'
-            ].text.split(' (')[0]
-            document.getElementById(
-                'tele'
-            ).textContent = countryInfo.Communications[
-                'Telecommunication systems'
-            ].international.text
-                .split(';')[0]
-                .split('- ')[1]
-            document.getElementById('net').textContent =
-                countryInfo.Communications['Internet country code'].text
+                ]?.text ?? 'null',
+                countryInfo?.Economy?.[
+                    'GDP (purchasing power parity)'
+                ]?.text.split('/')[0] ?? 'null',
+                countryInfo.Economy?.['Unemployment rate']?.text?.split(
+                    '/'
+                )[0] ?? 'null',
+                countryInfo.Economy?.['Exchange rates']?.text?.split(
+                    ' per'
+                )[0] ?? 'null',
+                countryInfo.Economy?.['Current account balance']?.text?.split(
+                    ' /'
+                )[0] ?? 'null',
+                countryInfo.Government?.Capital?.[
+                    'time difference'
+                ]?.text?.split(' (')[0] ?? 'null',
+                countryInfo.Communications?.[
+                    'Telecommunication systems'
+                ]?.international?.text
+                    ?.split(';')[0]
+                    .split('- ')[1] ?? 'null',
+                countryInfo.Communications?.['Internet country code']?.text ??
+                    'null',
+            ]
+
+            renderCountryInfo('name', 0)
+            renderCountryInfo('capital', 1)
+            renderCountryInfo('area', 2)
+            renderCountryInfo('coastline', 3)
+            renderCountryInfo('highest', 4)
+            renderCountryInfo('climate', 5)
+            renderCountryInfo('population', 6)
+            renderCountryInfo('ethnic', 7)
+            renderCountryInfo('language', 8)
+            renderCountryInfo('religion', 9)
+            renderCountryInfo('urban', 10)
+            renderCountryInfo('GDP', 11)
+            renderCountryInfo('unemployment', 12)
+            renderCountryInfo('currency', 13)
+            renderCountryInfo('trade', 14)
+            renderCountryInfo('time', 15)
+            renderCountryInfo('tele', 16)
+            renderCountryInfo('net', 17)
+
+            function renderCountryInfo(id, num) {
+                let node = document.getElementById(id)
+                if (contentList[num] !== 'null') {
+                    node.textContent = contentList[num]
+                } else {
+                    node.parentNode.style.display = 'none'
+                }
+            }
+
+            function reset() {
+                ids.forEach((id) => {
+                    document.getElementById(id).parentNode.style.display =
+                        'block'
+                })
+            }
         })
 }
 
@@ -237,3 +281,56 @@ d3.select('svg')
     .call(zoom)
     .call(() => render(land50))
     .node()
+
+/*
+function searchCountry(d) {
+    document.querySelector('#submit').addEventListener('click', (event) => {
+        event.preventDefault()
+        const q = event.currentTarget.previousElementSibling.value
+            .toLowerCase()
+            .replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+        let countries = d3.selectAll('path title')._groups[0]
+        let countriesList = Object.keys(countries)
+            .map((key) => [countries[key]])
+            .map((item) => item[0].textContent)
+        let index = countriesList.findIndex((country) => country === q)
+        let target = countries[index].parentNode
+        ;(d) => {
+            const [[x0, y0], [x1, y1]] = path.bounds(d)
+            event.stopPropagation()
+            countries.transition().style('fill', null)
+            d3.select(this).transition().style('fill', '#D1495B')
+            svg.transition()
+                .duration(750)
+                .call(
+                    zoom.transform,
+                    d3.zoomIdentity
+                        .translate(width / 2, height / 2)
+                        .scale(
+                            Math.min(
+                                8,
+                                0.9 /
+                                    Math.max(
+                                        (x1 - x0) / width,
+                                        (y1 - y0) / height
+                                    )
+                            )
+                        )
+                        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+                    d3.pointer(event, svg.node())
+                )
+            const name = event.currentTarget.textContent
+            d3.json('./db/country_code.json').then((results) => {
+                const countryCode = flattenObject(results)
+                const code = getKeyByValue(countryCode, `${name}`)
+                if (code) {
+                    const resultList = code.split('.')
+                    getCountryInfo(`${resultList[1]}`, `${resultList[0]}`, name)
+                } else {
+                    console.log('No matching infomation.')
+                }
+            })
+        }
+    })
+}
+*/
