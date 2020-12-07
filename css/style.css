@@ -29,6 +29,16 @@ a {
     color: inherit;
 }
 
+input,
+select,
+img {
+    vertical-align: middle;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .logo {
     display: inline-block;
     margin-left: 20px;
@@ -44,9 +54,8 @@ a {
     cursor: pointer;
 }
 
-.signBox {
-    display: inline-block;
-    /* display: none; */
+.signArea {
+    display: none;
     position: fixed;
     top: 50px;
     right: 20px;
@@ -60,6 +69,14 @@ a {
     border-radius: 10px;
     padding: 5px 10px;
     text-align: center;
+}
+
+.eye > img {
+    cursor: pointer;
+    width: 20px;
+    position: absolute;
+    top: 105px;
+    left: 220px;
 }
 
 .infoBox {

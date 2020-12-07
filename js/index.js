@@ -334,3 +334,43 @@ function searchCountry(d) {
     })
 }
 */
+
+const signBtn = document.querySelector('.signIn')
+const signBox = document.querySelector('.signInArea')
+const signUpBtn = document.querySelector('.signUpBtn')
+const signUpArea = document.querySelector('.signUpArea')
+const signInBtn = document.querySelector('.signInBtn')
+
+signBtn.addEventListener('click', () => {
+    if (
+        signBox.style.display === 'none' &&
+        signUpArea.style.display === 'none'
+    ) {
+        signBox.style.display = 'block'
+    } else {
+        signBox.style.display = 'none'
+        signUpArea.style.display = 'none'
+    }
+})
+
+const eye = document.querySelector('.eye img')
+eye.addEventListener('click', () => {
+    const x = document.querySelector('.passwordInput')
+    if (x.type === 'password') {
+        x.type = 'text'
+        eye.style.content = 'url(../images/invisible.png)'
+    } else {
+        x.type = 'password'
+        eye.style.content = 'url(../images/visible.png)'
+    }
+})
+
+signUpBtn.addEventListener('click', () => {
+    signBox.style.display = 'none'
+    signUpArea.style.display = 'block'
+})
+
+signInBtn.addEventListener('click', () => {
+    signUpArea.style.display = 'none'
+    signBox.style.display = 'block'
+})

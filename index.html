@@ -13,7 +13,111 @@
             <div class="signIn"><a>Sign-In</a></div>
         </header>
         <svg></svg>
-        <div class="signBox"></div>
+        <div class="signInArea signArea">
+            <div>
+                <h2>登入</h2>
+                <form action="">
+                    <div>
+                        <img
+                            src="images/user.png"
+                            alt="user"
+                            width="15px"
+                        /><input type="email" placeholder="Email" required />
+                    </div>
+                    <div>
+                        <img
+                            src="images/password.png"
+                            alt="password"
+                            width="15px"
+                        /><input
+                            class="passwordInput"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                        <span class="eye"
+                            ><img src="./images/visible.png"
+                        /></span>
+                    </div>
+                    <div style="display: inline-block">
+                        <input type="checkbox" />
+                        <span>記住我</span>
+                    </div>
+                    <button>登入</button>
+                </form>
+                <br />
+                <button class="signUpBtn">
+                    <img
+                        src="images/sign-up.png"
+                        alt="sign-up"
+                        width="15px"
+                    />註冊
+                </button>
+                <button>
+                    <img src="images/FB.png" alt="FB" width="15px" />Facebook
+                    登入
+                </button>
+                <button>
+                    <img
+                        src="images/Google.png"
+                        alt="Google"
+                        width="15px"
+                    />Google 登入
+                </button>
+            </div>
+        </div>
+        <div class="signUpArea signArea" style='display: none'>
+            <h2>註冊</h2>
+            <form action="">
+                <div>
+                    <img
+                        src="images/user.png"
+                        alt="user"
+                        width="15px"
+                    /><input type="email" placeholder="Email" required />
+                </div>
+                <div>
+                    <img
+                        src="images/password.png"
+                        alt="password"
+                        width="15px"
+                    /><input
+                        class="passwordInput"
+                        type="password"
+                        placeholder="Password"
+                        required
+                    />
+                    <span class="eye"
+                        ><img src="./images/visible.png"
+                    /></span>
+                </div>
+                <div>
+                    <img
+                        src="images/password.png"
+                        alt="password"
+                        width="15px"
+                    /><input
+                        class="passwordInput"
+                        type="password"
+                        placeholder="Check your Password"
+                        required
+                    />
+                    <span class="eye"
+                        ><img src="./images/visible.png"
+                    /></span>
+                </div>
+                <button>註冊</button>
+            </form>
+            <br />
+            <button class="signInBtn">
+                <img
+                    src="images/sign-up.png"
+                    alt="sign-up"
+                    width="15px"
+                />登入
+            </button>
+        </div>
+    </div>
         <div class="infoBox">
             <form>
                 <div>
