@@ -28,7 +28,7 @@ function render(land) {
             .data(topojson.feature(world, world.objects.countries).features)
             .join('path')
             .on('click', clicked)
-            // .call(() => searchCountry())
+            .call(() => searchCountry())
             .attr('d', path)
 
         countries.append('title').text((d) => d.properties.name)
@@ -282,58 +282,63 @@ d3.select('svg')
     .call(() => render(land50))
     .node()
 
-/*
-function searchCountry(d) {
+function searchCountry() {
     document.querySelector('#submit').addEventListener('click', (event) => {
         event.preventDefault()
         const q = event.currentTarget.previousElementSibling.value
             .toLowerCase()
             .replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
-        let countries = d3.selectAll('path title')._groups[0]
-        let countriesList = Object.keys(countries)
-            .map((key) => [countries[key]])
+        let countriesNode = d3.selectAll('path title')._groups[0]
+        let countriesList = Object.keys(countriesNode)
+            .map((key) => [countriesNode[key]])
             .map((item) => item[0].textContent)
         let index = countriesList.findIndex((country) => country === q)
-        let target = countries[index].parentNode
-        ;(d) => {
-            const [[x0, y0], [x1, y1]] = path.bounds(d)
-            event.stopPropagation()
-            countries.transition().style('fill', null)
-            d3.select(this).transition().style('fill', '#D1495B')
-            svg.transition()
-                .duration(750)
-                .call(
-                    zoom.transform,
-                    d3.zoomIdentity
-                        .translate(width / 2, height / 2)
-                        .scale(
-                            Math.min(
-                                8,
-                                0.9 /
-                                    Math.max(
-                                        (x1 - x0) / width,
-                                        (y1 - y0) / height
-                                    )
+        let target = countriesNode[index].parentNode
+        d3.json(land50).then((world) => {
+            let data = topojson.feature(world, world.objects.countries).features
+            let countryData = data.find((d) => d.properties.name === q)
+            ;(function (d) {
+                const [[x0, y0], [x1, y1]] = path.bounds(d)
+                event.stopPropagation()
+                countries.transition().style('fill', null)
+                d3.select(target).transition().style('fill', '#D1495B')
+                svg.transition()
+                    .duration(750)
+                    .call(
+                        zoom.transform,
+                        d3.zoomIdentity
+                            .translate(width / 2, height / 2)
+                            .scale(
+                                Math.min(
+                                    8,
+                                    0.9 /
+                                        Math.max(
+                                            (x1 - x0) / width,
+                                            (y1 - y0) / height
+                                        )
+                                )
                             )
+                            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+                        // d3.pointer(event, svg.node())
+                    )
+                d3.json('./db/country_code.json').then((results) => {
+                    const countryCode = flattenObject(results)
+                    const code = getKeyByValue(countryCode, `${q}`)
+                    if (code) {
+                        const resultList = code.split('.')
+                        getCountryInfo(
+                            `${resultList[1]}`,
+                            `${resultList[0]}`,
+                            q
                         )
-                        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-                    d3.pointer(event, svg.node())
-                )
-            const name = event.currentTarget.textContent
-            d3.json('./db/country_code.json').then((results) => {
-                const countryCode = flattenObject(results)
-                const code = getKeyByValue(countryCode, `${name}`)
-                if (code) {
-                    const resultList = code.split('.')
-                    getCountryInfo(`${resultList[1]}`, `${resultList[0]}`, name)
-                } else {
-                    console.log('No matching infomation.')
-                }
-            })
-        }
+                    } else {
+                        console.log('No matching infomation.')
+                    }
+                })
+            })(countryData)
+        })
     })
 }
-*/
 
 const signBtn = document.querySelector('.signIn')
 const signBox = document.querySelector('.signInArea')
