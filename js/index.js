@@ -1,5 +1,5 @@
-const land50 = './db/countries-50m.json'
-// const land110 = './db/countries-110m.json'
+// const land50 = './db/countries-50m.json'
+const land110 = './db/countries-110m.json'
 const width = 975,
     height = 540
 const projection = d3
@@ -28,7 +28,6 @@ function render(land) {
             .data(topojson.feature(world, world.objects.countries).features)
             .join('path')
             .on('click', clicked)
-            .call(() => searchCountry())
             .attr('d', path)
 
         countries.append('title').text((d) => d.properties.name)
@@ -199,7 +198,7 @@ function getCountryInfo(code, continent, name) {
                 ]?.text ?? 'null',
                 countryInfo?.Economy?.[
                     'GDP (purchasing power parity)'
-                ]?.text.split('/')[0] ?? 'null',
+                ]?.text?.split('/')[0] ?? 'null',
                 countryInfo.Economy?.['Unemployment rate']?.text?.split(
                     '/'
                 )[0] ?? 'null',
@@ -279,118 +278,76 @@ d3.select('svg')
     .on('click', reset)
     .call(drag)
     .call(zoom)
-    .call(() => render(land50))
+    .call(() => render(land110))
+    .call(() => searchCountry())
     .node()
 
 function searchCountry() {
-    document
-        .querySelector('.choices__inner')
-        .addEventListener('change', (event) => {
-            const selectedCountry =
-                event.currentTarget.children[1].children[0].dataset.value
-            let countriesNode = d3.selectAll('path title')._groups[0]
-            let countriesList = Object.keys(countriesNode)
-                .map((key) => [countriesNode[key]])
-                .map((item) => item[0].textContent)
-            let index = countriesList.findIndex(
-                (country) => country === selectedCountry
-            )
-            if (index < 0) {
-                return reset()
-            } else {
-                let target = countriesNode[index].parentNode
-                d3.json(land50).then((world) => {
-                    let data = topojson.feature(world, world.objects.countries)
-                        .features
-                    let countryData = data.find(
-                        (d) => d.properties.name === selectedCountry
-                    )
-                    ;(function (d) {
-                        const [[x0, y0], [x1, y1]] = path.bounds(d)
-                        event.stopPropagation()
-                        countries.transition().style('fill', null)
-                        d3.select(target).transition().style('fill', '#D1495B')
-                        svg.transition()
-                            .duration(750)
-                            .call(
-                                zoom.transform,
-                                d3.zoomIdentity
-                                    .translate(width / 2, height / 2)
-                                    .scale(
-                                        Math.min(
-                                            8,
-                                            0.9 /
-                                                Math.max(
-                                                    (x1 - x0) / width,
-                                                    (y1 - y0) / height
-                                                )
-                                        )
+    document.querySelector('.choices').addEventListener('change', (event) => {
+        const selectedCountry = event.currentTarget.children[0].textContent
+        let countriesNode = d3.selectAll('path title')._groups[0]
+        let countriesList = Object.keys(countriesNode)
+            .map((key) => [countriesNode[key]])
+            .map((item) => item[0].textContent)
+        let index = countriesList.findIndex(
+            (country) => country === selectedCountry
+        )
+        if (index < 0) {
+            return reset()
+        } else {
+            let target = countriesNode[index].parentNode
+            d3.json(land110).then((world) => {
+                let data = topojson.feature(world, world.objects.countries)
+                    .features
+                let countryData = data.find(
+                    (d) => d.properties.name === selectedCountry
+                )
+                ;(function (d) {
+                    const [[x0, y0], [x1, y1]] = path.bounds(d)
+                    event.stopPropagation()
+                    countries.transition().style('fill', null)
+                    d3.select(target).transition().style('fill', '#D1495B')
+                    svg.transition()
+                        .duration(750)
+                        .call(
+                            zoom.transform,
+                            d3.zoomIdentity
+                                .translate(width / 2, height / 2)
+                                .scale(
+                                    Math.min(
+                                        8,
+                                        0.9 /
+                                            Math.max(
+                                                (x1 - x0) / width,
+                                                (y1 - y0) / height
+                                            )
                                     )
-                                    .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
-                                // d3.pointer(event, svg.node())
-                            )
-                        d3.json('./db/country_code.json').then((results) => {
-                            const countryCode = flattenObject(results)
-                            const code = getKeyByValue(
-                                countryCode,
-                                `${selectedCountry}`
-                            )
-                            if (code) {
-                                const resultList = code.split('.')
-                                getCountryInfo(
-                                    `${resultList[1]}`,
-                                    `${resultList[0]}`,
-                                    selectedCountry
                                 )
-                            } else {
-                                console.log('No matching infomation.')
-                            }
-                        })
-                    })(countryData)
-                })
-            }
-        })
+                                .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+                            // d3.pointer(event, svg.node())
+                        )
+                    d3.json('./db/country_code.json').then((results) => {
+                        const countryCode = flattenObject(results)
+                        const code = getKeyByValue(
+                            countryCode,
+                            `${selectedCountry}`
+                        )
+                        if (code) {
+                            const resultList = code.split('.')
+                            getCountryInfo(
+                                `${resultList[1]}`,
+                                `${resultList[0]}`,
+                                selectedCountry
+                            )
+                        } else {
+                            console.log('No matching infomation.')
+                        }
+                    })
+                })(countryData)
+            })
+        }
+    })
 }
-
-const signBtn = document.querySelector('.signIn')
-const signBox = document.querySelector('.signInArea')
-const signUpBtn = document.querySelector('.signUpBtn')
-const signUpArea = document.querySelector('.signUpArea')
-const signInBtn = document.querySelector('.signInBtn')
-
-signBtn.addEventListener('click', () => {
-    if (
-        signBox.style.display === 'none' &&
-        signUpArea.style.display === 'none'
-    ) {
-        signBox.style.display = 'block'
-    } else {
-        signBox.style.display = 'none'
-        signUpArea.style.display = 'none'
-    }
-})
-
-const eye = document.querySelector('.eye img')
-eye.addEventListener('click', () => {
-    const x = document.querySelector('.passwordInput')
-    if (x.type === 'password') {
-        x.type = 'text'
-        eye.style.content = 'url(../images/invisible.png)'
-    } else {
-        x.type = 'password'
-        eye.style.content = 'url(../images/visible.png)'
-    }
-})
-
-signUpBtn.addEventListener('click', () => {
-    signBox.style.display = 'none'
-    signUpArea.style.display = 'block'
-})
-
-signInBtn.addEventListener('click', () => {
-    signUpArea.style.display = 'none'
-    signBox.style.display = 'block'
-})
 
 d3.json('./db/country_code.json')
     .then((results) => {

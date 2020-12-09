@@ -1,61 +1,146 @@
-// var firebaseConfig = {
-//     apiKey: 'AIzaSyB_u7VRtuCAfVSIBhwYcYLJwiZBJpH9-qo',
-//     authDomain: 'oyster-anping.firebaseapp.com',
-//     projectId: 'oyster-anping',
-//     storageBucket: 'oyster-anping.appspot.com',
-//     messagingSenderId: '473930989738',
-//     appId: '1:473930989738:web:cd62ac993e7f1b875950d3',
-// }
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig)
-// firebase.analytics()
+const firebaseConfig = {
+    apiKey: 'AIzaSyB_u7VRtuCAfVSIBhwYcYLJwiZBJpH9-qo',
+    authDomain: 'oyster-anping.firebaseapp.com',
+    projectId: 'oyster-anping',
+    storageBucket: 'oyster-anping.appspot.com',
+    messagingSenderId: '473930989738',
+    appId: '1:473930989738:web:cd62ac993e7f1b875950d3',
+}
 
-// // Initialize the FirebaseUI Widget using Firebase.
-// var ui = new firebaseui.auth.AuthUI(firebase.auth())
-// ui.start('#firebaseui-auth-container', {
-//     signInOptions: [
-//         firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-//     ],
-//     requireDisplayName: false,
-// })
-// var uiConfig = {
-//     callbacks: {
-//         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-//             // User successfully signed in.
-//             // Return type determines whether we continue the redirect automatically
-//             // or whether we leave that to developer to handle.
-//             return true
-//         },
-//         uiShown: function () {
-//             // The widget is rendered.
-//             // Hide the loader.
-//             document.getElementById('loader').style.display = 'none'
-//         },
-//     },
-//     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-//     signInFlow: 'popup',
-//     signInSuccessUrl: '<url-to-redirect-to-on-success>',
-//     signInOptions: [
-//         // Leave the lines as is for the providers you want to offer your users.
-//         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-//         firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//     ],
-//     // Terms of service url.
-//     tosUrl: '<your-tos-url>',
-//     // Privacy policy url.
-//     privacyPolicyUrl: '<your-privacy-policy-url>',
-// }
-// // The start method will wait until the DOM is loaded.
-// ui.start('#firebaseui-auth-container', uiConfig)
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+firebase.analytics()
 
-// //FB
-// var provider = new firebase.auth.FacebookAuthProvider()
+const memberBtn = document.querySelector('.member')
+const signInArea = document.querySelector('.signInArea')
+const signUpBtn = document.querySelector('.signUpBtn')
+const signUpArea = document.querySelector('.signUpArea')
+const signInBtn = document.querySelector('.signInBtn')
+const signOutBtn = document.querySelector('.signOut')
+
+signOutBtn.addEventListener('click', signOut)
+
+memberBtn.addEventListener('click', () => {
+    if (
+        signInArea.style.display === 'none' &&
+        signUpArea.style.display === 'none'
+    ) {
+        signInArea.style.display = 'block'
+    } else {
+        signInArea.style.display = 'none'
+        signUpArea.style.display = 'none'
+    }
+})
+
+const eyes = document.querySelectorAll('.eye img')
+eyes.forEach((eye) =>
+    eye.addEventListener('click', () => {
+        const inputs = document.querySelectorAll('.passwordInput')
+        for (let i = 0; i < 2; i++) {
+            if (inputs[i].type === 'password') {
+                inputs[i].type = 'text'
+                eye.style.content = 'url(../images/invisible.png)'
+            } else {
+                inputs[i].type = 'password'
+                eye.style.content = 'url(../images/visible.png)'
+            }
+        }
+    })
+)
+
+signUpBtn.addEventListener('click', () => {
+    signInArea.style.display = 'none'
+    signUpArea.style.display = 'block'
+})
+
+signInBtn.addEventListener('click', () => {
+    signUpArea.style.display = 'none'
+    signInArea.style.display = 'block'
+})
+
+// Sign up new users
+document.querySelector('#signUp').addEventListener('click', (e) => {
+    e.preventDefault()
+    const email = document.querySelector('.signUpArea input[type="email"]')
+        .value
+    const password = document.querySelector(
+        '.signUpArea input[type="password"]'
+    ).value
+    firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+            // Signed in
+            signUpArea.style.display = 'none'
+        })
+        .catch((error) => {
+            var errorCode = error.code
+            var errorMessage = error.message
+            console.log(errorCode, errorMessage)
+            alert(errorMessage)
+        })
+})
+
+// Sign in existing users
+document.querySelector('#signIn').addEventListener('click', (e) => {
+    e.preventDefault()
+    const email = document.querySelector('.signInArea input[type="email"]')
+        .value
+    const password = document.querySelector(
+        '.signInArea input[type="password"]'
+    ).value
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+            // Signed in
+            signInArea.style.display = 'none'
+        })
+        .catch((error) => {
+            var errorCode = error.code
+            var errorMessage = error.message
+            console.log(errorCode, errorMessage)
+            alert(errorMessage)
+        })
+})
+
+// Authentication state observer
+function checkLoginStatus() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in
+            var uid = user.uid
+            console.log(uid)
+            memberBtn.style.display = 'none'
+            signOutBtn.style.display = 'inline-block'
+        } else {
+            // User is signed out
+            console.log('User is signed out!')
+            memberBtn.style.display = 'inline-block'
+            signOutBtn.style.display = 'none'
+        }
+    })
+}
+
+// // Get user's profile
+// var user = firebase.auth().currentUser
+// var name, email, photoUrl, uid, emailVerified
+
+// if (user != null) {
+//     name = user.displayName
+//     email = user.email
+//     photoUrl = user.photoURL
+//     emailVerified = user.emailVerified
+//     uid = user.uid // The user's ID, unique to the Firebase project. Do NOT use
+//     // this value to authenticate with your backend server, if
+//     // you have one. Use User.getToken() instead.
+// }
+
+// // FB Login
+// const providerFB = new firebase.auth.FacebookAuthProvider()
 // firebase
 //     .auth()
-//     .signInWithPopup(provider)
+//     .signInWithPopup(providerFB)
 //     .then(function (result) {
 //         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
 //         var token = result.credential.accessToken
@@ -74,79 +159,17 @@
 //         // ...
 //     })
 
-// /* login */
-// var user = firebase.auth().currentUser
+//Sign out
+function signOut() {
+    firebase
+        .auth()
+        .signOut()
+        .then(function () {
+            console.log('Sign-out successful!')
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
 
-// if (user) {
-//     // User is signed in.
-// } else {
-//     // No user is signed in.
-// }
-
-// var name, email, photoUrl, uid, emailVerified
-
-// if (user != null) {
-//     name = user.displayName
-//     email = user.email
-//     photoUrl = user.photoURL
-//     emailVerified = user.emailVerified
-//     uid = user.uid // The user's ID, unique to the Firebase project. Do NOT use
-//     // this value to authenticate with your backend server, if
-//     // you have one. Use User.getToken() instead.
-//     user.providerData.forEach(function (profile) {
-//         console.log('Sign-in provider: ' + profile.providerId)
-//         console.log('  Provider-specific UID: ' + profile.uid)
-//         console.log('  Name: ' + profile.displayName)
-//         console.log('  Email: ' + profile.email)
-//         console.log('  Photo URL: ' + profile.photoURL)
-//     })
-// }
-// // 註冊
-// firebase
-//     .auth()
-//     .createUserWithEmailAndPassword(email, password)
-//     .then((user) => {
-//         // Signed in
-//         // ...
-//     })
-//     .catch((error) => {
-//         var errorCode = error.code
-//         var errorMessage = error.message
-//         // ..
-//     })
-
-// // 登入
-// firebase
-//     .auth()
-//     .signInWithEmailAndPassword(email, password)
-//     .then((user) => {
-//         // Signed in
-//         // ...
-//     })
-//     .catch((error) => {
-//         var errorCode = error.code
-//         var errorMessage = error.message
-//     })
-
-// firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//         // User is signed in, see docs for a list of available properties
-//         // https://firebase.google.com/docs/reference/js/firebase.User
-//         var uid = user.uid
-//         // ...
-//     } else {
-//         // User is signed out
-//         // ...
-//     }
-// })
-
-// //sign out
-// firebase
-//     .auth()
-//     .signOut()
-//     .then(function () {
-//         // Sign-out successful.
-//     })
-//     .catch(function (error) {
-//         // An error happened.
-//     })
+window.addEventListener('DOMContentLoaded', checkLoginStatus)

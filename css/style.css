@@ -44,13 +44,13 @@ button:hover {
     margin-left: 20px;
 }
 
-.signIn {
+.btn {
     float: right;
     display: inline-block;
     margin-right: 20px;
 }
 
-.signIn:hover {
+.btn:hover {
     cursor: pointer;
 }
 
@@ -75,8 +75,8 @@ button:hover {
     cursor: pointer;
     width: 20px;
     position: absolute;
-    top: 105px;
-    left: 220px;
+    top: 72px;
+    left: 210px;
 }
 
 .infoBox {
