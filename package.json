@@ -23,7 +23,5 @@
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
   },
-  "dependencies": {
-    "choices.js": "^9.0.1"
-  }
+  "dependencies": {}
 }

@@ -15,6 +15,7 @@
     "globals": {
         "d3": "writable",
         "topojson": "writable",
-        "versor": "writable"
+        "versor": "writable",
+        "Choices": "writable"
     }
 }

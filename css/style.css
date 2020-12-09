@@ -101,3 +101,7 @@ button:hover {
     border: 1px solid;
     padding: 1px 3px;
 }
+
+.choices {
+    color: #444;
+}

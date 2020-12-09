@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Oyster！</title>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
         <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth__zh_tw.js"></script>
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
         <header>
@@ -124,17 +126,7 @@
         </div>
     </div>
         <div class="infoBox">
-            <form>
-                <div>
-                    <label for="search">搜尋</label
-                    ><input
-                        type="text"
-                        id="search"
-                        placeholder="想去哪兒？"
-                        onClick="this.select();"
-                    /><input id="submit" type="submit" value="Search" />
-                </div>
-            </form>
+            <div><select class="choices" data-type="select-one"></select></div>
             <div class="country" style="display: none">
                 <h3 id="name"></h3>
                 <h4>Capital: <span id="capital"></span></h4>
@@ -267,6 +259,7 @@
         <script src="https://d3js.org/d3.v6.js"></script>
         <script src="https://unpkg.com/topojson@3"></script>
         <script src="https://unpkg.com/versor"></script>
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
         <script src="js/index.js"></script>
         <!-- <script src="js/login.js"></script> -->
     </body>
