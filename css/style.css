@@ -4,16 +4,32 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 header {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    color: #566492;
+    font-size: 16px;
+}
+
+.nav:hover {
+    cursor: pointer;
+    color: #ddca03;
+}
+
+footer {
     position: fixed;
-    padding-top: 10px;
+    bottom: 0;
     width: 100%;
-    height: 20px;
-    background-color: #003d5b;
-    color: #eee;
+    height: 10px;
+    background-color: #566492;
 }
 
 svg {
@@ -21,7 +37,7 @@ svg {
 }
 
 span {
-    color: #edae49;
+    color: #ddca03;
 }
 
 a {
@@ -39,19 +55,16 @@ button:hover {
     cursor: pointer;
 }
 
-.logo {
-    display: inline-block;
-    margin-left: 20px;
+h3 {
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-top: 10px;
+    border-bottom: 1px solid #ddca03;
 }
 
-.btn {
-    float: right;
-    display: inline-block;
+.nav {
     margin-right: 20px;
-}
-
-.btn:hover {
-    cursor: pointer;
 }
 
 .signArea {
@@ -82,17 +95,16 @@ button:hover {
 .infoBox {
     display: inline-block;
     position: fixed;
-    top: 50px;
-    left: 20px;
-    width: 300px;
+    top: 40px;
+    left: 40px;
+    width: 400px;
     height: 85%;
-    background-color: #00798c;
+    background-color: #7785a9;
     color: #eee;
-    overflow-y: scroll;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    border-radius: 5px;
-    padding: 5px 10px;
+    padding: 25px;
+    overflow-y: scroll;
 }
 
 .topic > span {

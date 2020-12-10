@@ -8,10 +8,10 @@ const projection = d3
     .scale(245)
     .translate([width / 2, height / 2])
 const path = d3.geoPath().projection(projection)
-const svg = d3.select('svg').attr('viewBox', [0, 0, width, height])
+const svg = d3.select('svg').attr('viewBox', [-100, 0, width, height])
 const g = svg.append('g')
 g.append('path')
-    .attr('fill', '#fff')
+    .attr('fill', 'none')
     .attr('d', path({ type: 'Sphere' }))
 let countries
 
@@ -22,7 +22,7 @@ function render(land) {
     d3.json(land).then((world) => {
         countries = g
             .append('g')
-            .attr('fill', '#444')
+            .attr('fill', '#566492')
             .attr('cursor', 'pointer')
             .selectAll('path')
             .data(topojson.feature(world, world.objects.countries).features)
@@ -64,7 +64,7 @@ function clicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d)
     event.stopPropagation()
     countries.transition().style('fill', null)
-    d3.select(this).transition().style('fill', '#D1495B')
+    d3.select(this).transition().style('fill', '#ddca03')
     svg.transition()
         .duration(750)
         .call(
@@ -306,7 +306,7 @@ function searchCountry() {
                     const [[x0, y0], [x1, y1]] = path.bounds(d)
                     event.stopPropagation()
                     countries.transition().style('fill', null)
-                    d3.select(target).transition().style('fill', '#D1495B')
+                    d3.select(target).transition().style('fill', '#ddca03')
                     svg.transition()
                         .duration(750)
                         .call(

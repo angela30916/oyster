@@ -11,22 +11,32 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
-const memberBtn = document.querySelector('.member')
+const memberBtn = document.querySelector('.login')
 const signInArea = document.querySelector('.signInArea')
 const signUpBtn = document.querySelector('.signUpBtn')
 const signUpArea = document.querySelector('.signUpArea')
 const signInBtn = document.querySelector('.signInBtn')
-const signOutBtn = document.querySelector('.signOut')
+const signOutBtn = document.querySelector('.logout')
 
 signOutBtn.addEventListener('click', signOut)
 
-memberBtn.addEventListener('click', () => {
+memberBtn.addEventListener('click', (e) => {
+    e.stopPropagation()
     if (
         signInArea.style.display === 'none' &&
         signUpArea.style.display === 'none'
     ) {
         signInArea.style.display = 'block'
     } else {
+        signInArea.style.display = 'none'
+        signUpArea.style.display = 'none'
+    }
+})
+
+document.addEventListener('click', (e) => {
+    const isClickInside =
+        signInArea.contains(e.target) || signUpArea.contains(e.target)
+    if (!isClickInside) {
         signInArea.style.display = 'none'
         signUpArea.style.display = 'none'
     }
@@ -136,29 +146,61 @@ function checkLoginStatus() {
 //     // you have one. Use User.getToken() instead.
 // }
 
-// // FB Login
-// const providerFB = new firebase.auth.FacebookAuthProvider()
-// firebase
-//     .auth()
-//     .signInWithPopup(providerFB)
-//     .then(function (result) {
-//         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-//         var token = result.credential.accessToken
-//         // The signed-in user info.
-//         var user = result.user
-//         // ...
-//     })
-//     .catch(function (error) {
-//         // Handle Errors here.
-//         var errorCode = error.code
-//         var errorMessage = error.message
-//         // The email of the user's account used.
-//         var email = error.email
-//         // The firebase.auth.AuthCredential type that was used.
-//         var credential = error.credential
-//         // ...
-//     })
+// FB Login
+document.querySelector('#FBLogin').addEventListener('click', (e) => {
+    e.preventDefault()
+    const provider = new firebase.auth.FacebookAuthProvider()
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function () {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            // var token = result.credential.accessToken
+            // The signed-in user info.
+            // var user = result.user
+            // ...
+            signInArea.style.display = 'none'
+        })
+        .catch(function (error) {
+            // Handle Errors here.
+            // var errorCode = error.code
+            // var errorMessage = error.message
+            // The email of the user's account used.
+            // var email = error.email
+            // The firebase.auth.AuthCredential type that was used.
+            // var credential = error.credential
+            // ...
+            console.log(error)
+        })
+})
 
+// Google Sign-In
+document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
+    e.preventDefault()
+    const provider = new firebase.auth.GoogleAuthProvider()
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function () {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            // var token = result.credential.accessToken
+            // The signed-in user info.
+            // var user = result.user
+            // ...
+            signInArea.style.display = 'none'
+        })
+        .catch(function (error) {
+            // Handle Errors here.
+            // var errorCode = error.code
+            // var errorMessage = error.message
+            // The email of the user's account used.
+            // var email = error.email
+            // The firebase.auth.AuthCredential type that was used.
+            // var credential = error.credential
+            // ...
+            console.log(error)
+        })
+})
 //Sign out
 function signOut() {
     firebase

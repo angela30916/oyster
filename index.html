@@ -11,9 +11,10 @@
     </head>
     <body>
         <header>
-            <div class="logo"><a href="./">Welcome to OYSTER！</a></div>
-            <div class="member btn" style="display: none"><a>Member</a></div>
-            <div class="signOut btn" style="display: none"><a>Sign Out</a></div>
+            <div class="nav"><a href="./">HOME</a></div>
+            <div class="nav"><a>EXPLORE</a></div>
+            <div class="login nav" style="display: none"><a>LOG IN</a></div>
+            <div class="logout nav" style="display: none"><a>LOG OUT</a></div>
         </header>
         <svg></svg>
         <div class="signInArea signArea" style="display: none">
@@ -57,11 +58,11 @@
                         width="15px"
                     />註冊
                 </button>
-                <button>
+                <button id="FBLogin">
                     <img src="images/FB.png" alt="FB" width="15px" />Facebook
                     登入
                 </button>
-                <button>
+                <button id="GoogleLogin">
                     <img
                         src="images/Google.png"
                         alt="Google"
@@ -252,6 +253,7 @@
                 </div>
             </div>
         </div>
+        <footer></footer>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
