@@ -171,6 +171,13 @@ let ids = [
 ]
 
 function getCountryInfo(code, continent, name) {
+    document
+        .getElementById('countryImg')
+        .setAttribute(
+            'src',
+            `https://factbook.github.io/images/flags/${code}.png`
+        )
+
     fetch(
         `https://raw.githubusercontent.com/factbook/factbook.json/master/${continent}/${code}.json`
     )
