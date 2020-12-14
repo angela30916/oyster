@@ -15,7 +15,7 @@ header {
     position: absolute;
     top: 40px;
     right: 30px;
-    color: #566492;
+    color: #7785a9;
     font-size: 16px;
 }
 
@@ -82,7 +82,6 @@ h3 {
 }
 
 .signArea {
-    display: none;
     position: fixed;
     top: 80px;
     right: 40px;
@@ -148,4 +147,50 @@ h3 {
 #countryImg {
     width: 100px;
     margin-top: 20px;
+}
+
+.flag {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stars {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.stars img {
+    width: 30px;
+}
+
+.exploreArea {
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+}
+
+.colorBar {
+    width: 30px;
+    height: 30px;
+}
+
+.colorBar1 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+}
+
+.colorBar2 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: orange;
+}
+
+.colorBar3 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
 }
