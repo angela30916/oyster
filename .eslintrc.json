@@ -17,6 +17,7 @@
         "topojson": "writable",
         "versor": "writable",
         "Choices": "writable",
-        "firebase": "writable"
+        "firebase": "writable",
+        "Swal": "writable"
     }
 }

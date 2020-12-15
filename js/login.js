@@ -6,8 +6,6 @@ const firebaseConfig = {
     messagingSenderId: '473930989738',
     appId: '1:473930989738:web:cd62ac993e7f1b875950d3',
 }
-
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
@@ -17,8 +15,6 @@ const signUpBtn = document.querySelector('.signUpBtn')
 const signUpArea = document.querySelector('.signUpArea')
 const signInBtn = document.querySelector('.signInBtn')
 const signOutBtn = document.querySelector('.logout')
-
-signOutBtn.addEventListener('click', signOut)
 
 memberBtn.addEventListener('click', (e) => {
     e.stopPropagation()
@@ -42,21 +38,17 @@ document.addEventListener('click', (e) => {
     }
 })
 
-const eyes = document.querySelectorAll('.eye img')
-eyes.forEach((eye) =>
-    eye.addEventListener('click', () => {
-        const inputs = document.querySelectorAll('.passwordInput')
-        for (let i = 0; i < 2; i++) {
-            if (inputs[i].type === 'password') {
-                inputs[i].type = 'text'
-                eye.style.content = 'url(../images/invisible.png)'
-            } else {
-                inputs[i].type = 'password'
-                eye.style.content = 'url(../images/visible.png)'
-            }
-        }
-    })
-)
+const eye = document.querySelector('.eye img')
+eye.addEventListener('click', () => {
+    const input = document.querySelector('.passwordInput')
+    if (input.type === 'password') {
+        input.type = 'text'
+        eye.style.content = 'url(../images/visible.png)'
+    } else {
+        input.type = 'password'
+        eye.style.content = 'url(../images/invisible.png)'
+    }
+})
 
 signUpBtn.addEventListener('click', () => {
     signInArea.style.display = 'none'
@@ -68,49 +60,249 @@ signInBtn.addEventListener('click', () => {
     signInArea.style.display = 'block'
 })
 
+// Remember Me
+const rmCheck = document.getElementById('rememberMe')
+const emailInput = document.querySelector('.signInArea input[type="email"]')
+
+if (localStorage.checkbox && localStorage.checkbox !== '') {
+    rmCheck.setAttribute('checked', 'checked')
+    emailInput.value = localStorage.username
+} else {
+    rmCheck.removeAttribute('checked')
+    emailInput.value = ''
+}
+
+function lsRememberMe() {
+    if (rmCheck.checked && emailInput.value !== '') {
+        localStorage.username = emailInput.value
+        localStorage.checkbox = rmCheck.value
+    } else {
+        localStorage.username = ''
+        localStorage.checkbox = ''
+    }
+}
+
 // Sign up new users
 document.querySelector('#signUp').addEventListener('click', (e) => {
     e.preventDefault()
-    const email = document.querySelector('.signUpArea input[type="email"]')
-        .value
-    const password = document.querySelector(
-        '.signUpArea input[type="password"]'
-    ).value
+    let username = document
+        .querySelector('.signUpArea input[type="text"]')
+        .value.trim()
+    let email = document
+        .querySelector('.signUpArea input[type="email"]')
+        .value.trim()
+    let password = document.querySelectorAll('.passwordInput')[1].value.trim()
+    let confirmPassword = document
+        .querySelectorAll('.passwordInput')[2]
+        .value.trim()
+
+    const emailRegex = /^([a-z0-9_-]+)@([\da-z-]+)\.([a-z]{2,6})$/
+    if (!username) {
+        Swal.fire({
+            title: 'Please fill in your name!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    } else if (!emailRegex.test(email)) {
+        Swal.fire({
+            title: 'Please check your email address!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    } else if (!password) {
+        Swal.fire({
+            title: 'Please set up your password!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    } else if (confirmPassword !== password) {
+        Swal.fire({
+            title: 'Please check your password again!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    }
+
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-            // Signed in
-            signUpArea.style.display = 'none'
+            firebase
+                .auth()
+                .currentUser.updateProfile({
+                    displayName: `${username}`,
+                })
+                .then(() => {
+                    signUpArea.style.display = 'none'
+                    Swal.fire({
+                        title: 'Signed up sucessfully!',
+                        text: `Hello, ${username}!`,
+                        icon: 'success',
+                        confirmButtonColor: '#566492',
+                        confirmButtonText: 'OK',
+                    })
+                })
         })
         .catch((error) => {
-            var errorCode = error.code
-            var errorMessage = error.message
-            console.log(errorCode, errorMessage)
-            alert(errorMessage)
+            const errorMessage = error.message
+            Swal.fire({
+                title: 'Oops...',
+                text: `${errorMessage}`,
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
         })
 })
 
 // Sign in existing users
 document.querySelector('#signIn').addEventListener('click', (e) => {
     e.preventDefault()
-    const email = document.querySelector('.signInArea input[type="email"]')
-        .value
-    const password = document.querySelector(
-        '.signInArea input[type="password"]'
-    ).value
+    lsRememberMe()
+    let email = document
+        .querySelector('.signInArea input[type="email"]')
+        .value.trim()
+    let password = document
+        .querySelector('.signInArea input[type="password"]')
+        .value.trim()
+
+    const emailRegex = /^([a-z0-9_-]+)@([\da-z-]+)\.([a-z]{2,6})$/
+    if (!emailRegex.test(email)) {
+        Swal.fire({
+            title: 'Please check your email address!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    } else if (!password) {
+        Swal.fire({
+            title: 'Please fill in your password!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
+        return
+    }
+
     firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(() => {
-            // Signed in
+        .then((result) => {
             signInArea.style.display = 'none'
+            const user = result.user
+            Swal.fire({
+                title: 'Logged in sucessfully!',
+                text: user.displayName
+                    ? `Welcome back, ${user.displayName}!`
+                    : 'Welcome back!',
+                icon: 'success',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
         })
         .catch((error) => {
-            var errorCode = error.code
-            var errorMessage = error.message
-            console.log(errorCode, errorMessage)
-            alert(errorMessage)
+            const errorMessage = error.message
+            Swal.fire({
+                title: 'Oops...',
+                text: `${errorMessage}`,
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+        })
+})
+
+// FB Login
+document.querySelector('#FBLogin').addEventListener('click', (e) => {
+    e.preventDefault()
+    const provider = new firebase.auth.FacebookAuthProvider()
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function (result) {
+            signInArea.style.display = 'none'
+            const user = result.user
+            Swal.fire({
+                title: 'Sucessfully logged in with Facebook!',
+                text: `Hello, ${user.displayName}!`,
+                icon: 'success',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+        })
+        .catch(function (error) {
+            const errorMessage = error.message
+            Swal.fire({
+                title: 'Oops...',
+                text: `${errorMessage}`,
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+        })
+})
+
+// Google Sign-In
+document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
+    e.preventDefault()
+    const provider = new firebase.auth.GoogleAuthProvider()
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function (result) {
+            signInArea.style.display = 'none'
+            const user = result.user
+            Swal.fire({
+                title: 'Sucessfully logged in with Google!',
+                text: `Hello, ${user.displayName}!`,
+                icon: 'success',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+        })
+        .catch(function (error) {
+            const errorMessage = error.message
+            Swal.fire({
+                title: 'Oops...',
+                text: `${errorMessage}`,
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+        })
+})
+
+//Sign out
+signOutBtn.addEventListener('click', () => {
+    firebase
+        .auth()
+        .signOut()
+        .then(function () {
+            Swal.fire({
+                title: 'You are logged out!',
+                icon: 'success',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            }).then(() => location.reload())
+        })
+        .catch(function (error) {
+            const errorMessage = error.message
+            Swal.fire({
+                title: 'Oops...',
+                text: `${errorMessage}`,
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
         })
 })
 
@@ -130,88 +322,6 @@ function checkLoginStatus() {
             signOutBtn.style.display = 'none'
         }
     })
-}
-
-// // Get user's profile
-// var user = firebase.auth().currentUser
-// var name, email, photoUrl, uid, emailVerified
-
-// if (user != null) {
-//     name = user.displayName
-//     email = user.email
-//     photoUrl = user.photoURL
-//     emailVerified = user.emailVerified
-//     uid = user.uid // The user's ID, unique to the Firebase project. Do NOT use
-//     // this value to authenticate with your backend server, if
-//     // you have one. Use User.getToken() instead.
-// }
-
-// FB Login
-document.querySelector('#FBLogin').addEventListener('click', (e) => {
-    e.preventDefault()
-    const provider = new firebase.auth.FacebookAuthProvider()
-    firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(function () {
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            // var token = result.credential.accessToken
-            // The signed-in user info.
-            // var user = result.user
-            // ...
-            signInArea.style.display = 'none'
-        })
-        .catch(function (error) {
-            // Handle Errors here.
-            // var errorCode = error.code
-            // var errorMessage = error.message
-            // The email of the user's account used.
-            // var email = error.email
-            // The firebase.auth.AuthCredential type that was used.
-            // var credential = error.credential
-            // ...
-            console.log(error)
-        })
-})
-
-// Google Sign-In
-document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
-    e.preventDefault()
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(function () {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            // var token = result.credential.accessToken
-            // The signed-in user info.
-            // var user = result.user
-            // ...
-            signInArea.style.display = 'none'
-        })
-        .catch(function (error) {
-            // Handle Errors here.
-            // var errorCode = error.code
-            // var errorMessage = error.message
-            // The email of the user's account used.
-            // var email = error.email
-            // The firebase.auth.AuthCredential type that was used.
-            // var credential = error.credential
-            // ...
-            console.log(error)
-        })
-})
-//Sign out
-function signOut() {
-    firebase
-        .auth()
-        .signOut()
-        .then(function () {
-            console.log('Sign-out successful!')
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
 }
 
 window.addEventListener('DOMContentLoaded', checkLoginStatus)
