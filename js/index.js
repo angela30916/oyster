@@ -1,3 +1,4 @@
+/* global userData */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -88,7 +89,12 @@ function clicked(event, d) {
             const resultList = code.split('.')
             getCountryInfo(`${resultList[1]}`, `${resultList[0]}`, name)
         } else {
-            console.log('No matching infomation.')
+            Swal.fire({
+                title: 'Sorry, no matching infomation!',
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
         }
     })
 }
@@ -171,6 +177,40 @@ let ids = [
 ]
 
 function getCountryInfo(code, continent, name) {
+    const visitedBtn = document.querySelector('#visted path')
+    const wishlistBtn = document.querySelector('#wishlist path')
+    const visitedSVG = document.querySelector('#visted')
+    const wishlistSVG = document.querySelector('#wishlist')
+
+    const user = firebase.auth().currentUser
+    if (user) {
+        const uid = user.uid
+        userData
+            .doc(`${uid}`)
+            .get()
+            .then((doc) => {
+                const visited = doc.data().visited.includes(`${name}`)
+                const wishlist = doc.data().wishlist.includes(`${name}`)
+                if (visited) {
+                    visitedBtn.style.fill = '#5bd4cf'
+                    visitedSVG.setAttribute('data', '1')
+                } else {
+                    visitedBtn.style.fill = '#fff'
+                    visitedSVG.setAttribute('data', '0')
+                }
+
+                if (wishlist) {
+                    wishlistBtn.style.fill = '#ff7979'
+                    wishlistSVG.setAttribute('data', '1')
+                } else {
+                    wishlistBtn.style.fill = '#fff'
+                    wishlistSVG.setAttribute('data', '0')
+                }
+            })
+    } else {
+        visitedBtn.style.fill = '#fff'
+        wishlistBtn.style.fill = '#fff'
+    }
     document
         .getElementById('countryImg')
         .setAttribute(
@@ -281,14 +321,6 @@ const flattenObject = (obj, prefix = '') =>
         return acc
     }, {})
 
-d3.select('svg')
-    .on('click', reset)
-    .call(drag)
-    .call(zoom)
-    .call(() => render(land110))
-    .call(() => searchCountry())
-    .node()
-
 function searchCountry() {
     document.querySelector('.choices').addEventListener('change', (event) => {
         const selectedCountry = event.currentTarget.children[0].textContent
@@ -347,7 +379,12 @@ function searchCountry() {
                                 selectedCountry
                             )
                         } else {
-                            console.log('No matching infomation.')
+                            Swal.fire({
+                                title: 'Sorry, no matching infomation!',
+                                icon: 'error',
+                                confirmButtonColor: '#566492',
+                                confirmButtonText: 'OK',
+                            })
                         }
                     })
                 })(countryData)
@@ -355,6 +392,14 @@ function searchCountry() {
         }
     })
 }
+
+d3.select('svg')
+    .on('click', reset)
+    .call(drag)
+    .call(zoom)
+    .call(() => render(land110))
+    .call(() => searchCountry())
+    .node()
 
 d3.json('./db/country_code.json')
     .then((results) => {

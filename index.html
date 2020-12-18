@@ -1,278 +1,263 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Oyster！</title>
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-    </head>
-    <body>
-        <header>
-            <div class="nav"><a href="./">HOME</a></div>
-            <div class="nav" id="exploreBtn"><a>EXPLORE</a></div>
-            <div class="login nav" style="display: none"><a>LOG IN</a></div>
-            <div class="logout nav" style="display: none"><a>LOG OUT</a></div>
-        </header>
-        <svg></svg>
-        <div class="exploreArea" style="display: none">
-            <div><div class="colorBar1"></div><span>My Map</span></div>
-            <div><div class="colorBar2"></div><span>John's Map</span></div>
-            <div><div class="colorBar3"></div><span>Mary's Map</span></div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oyster！</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="nav"><a href="./">HOME</a></div>
+        <div class="nav" id="exploreBtn"><a>EXPLORE</a></div>
+        <div class="login nav" style="display: none"><a>LOG IN</a></div>
+        <div class="logout nav" style="display: none"><a>LOG OUT</a></div>
+    </header>
+    <svg></svg>
+    <div class="exploreArea" style="display: none">
+        <div>
+            <div class="colorBar1"></div>
+            <span>My Map</span>
         </div>
-        <div class="signInArea signArea" style="display: none">
-            <div>
-                <h2>Welcome back!</h2>
-                <form action="">
-                    <div>
-                        <img
-                            src="images/user.png"
-                            alt="user"
-                            width="15px"
-                        /><input type="email" placeholder="Email" autocomplete="on" />
-                    </div>
-                    <div>
-                        <img
-                            src="images/password.png"
-                            alt="password"
-                            width="15px"
-                        /><input
-                            class="passwordInput"
-                            type="password"
-                            placeholder="Password"
-                            autocomplete="on"
-                        />
-                        <span class="eye"
-                            ><img src="./images/invisible.png"
-                        /></span>
-                    </div>
-                    <div style="display: inline-block">
-                        <input type="checkbox" value="lsRememberMe" id="rememberMe" checked/>
-                        <label for="rememberMe">Remember me</label>
-                    </div>
-                    <button id="signIn">LOG IN</button>
-                </form>
-                <br />
-                <div class="bridge"><span>Or connect using</span></div>
-                <button id="FBLogin">
-                    <svg fill="white" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M255.022,511.998l0.229,0.001l-0.079,0l-0.15,-0.001Zm1.806,0.001l-0.079,0l0.229,-0.001l-0.15,0.001Zm-2.588,-0.005l0.247,0.001l-0.142,0l-0.105,-0.001Zm3.415,0.001l-0.142,0l0.247,-0.001l-0.105,0.001Zm-4.169,-0.007l0.165,0.001l-0.132,-0.001l-0.033,0Zm4.995,0l-0.132,0.001l0.165,-0.001l-0.033,0Zm0.826,-0.009l-0.058,0.001l0.223,-0.003l-0.165,0.002Zm-6.779,-0.002l0.223,0.003l-0.058,-0.001l-0.165,-0.002Zm7.604,-0.01l-0.135,0.002l0.275,-0.004l-0.14,0.002Zm-8.404,-0.002l0.275,0.004l-0.135,-0.002l-0.14,-0.002Zm9.228,-0.012l-0.182,0.003l0.254,-0.005l-0.072,0.002Zm-9.984,-0.002l0.254,0.005l-0.182,-0.003l-0.072,-0.002Zm-0.937,-0.019l0.225,0.005l-0.04,-0.001l-0.185,-0.004Zm11.745,0.004l-0.04,0.001l0.225,-0.005l-0.185,0.004Zm-12.567,-0.025l0.309,0.008l-0.125,-0.003l-0.184,-0.005Zm13.39,0.005l-0.125,0.003l0.309,-0.008l-0.184,0.005Zm0.823,-0.022l-0.201,0.006l0.316,-0.009l-0.115,0.003Zm-14.967,-0.003l0.316,0.009l-0.201,-0.006l-0.115,-0.003Zm-0.72,-0.022l0.225,0.007l-0.212,-0.007l-0.194,-0.006l0.181,0.006Zm16.509,0l-0.212,0.007l0.225,-0.007l0.181,-0.006l-0.194,0.006Zm0.821,-0.027l-0.112,0.004l0.345,-0.012l-0.233,0.008Zm-18.371,-0.008l0.345,0.012l-0.112,-0.004l-0.233,-0.008Zm-0.749,-0.028l0.362,0.013l-0.201,-0.007l-0.161,-0.006Zm19.941,0.006l-0.201,0.007l0.362,-0.013l-0.161,0.006Zm-20.676,-0.036l0.354,0.015l-0.277,-0.011l-0.077,-0.004Zm21.495,0.004l-0.277,0.011l0.354,-0.015l-0.077,0.004Zm-22.525,-0.049l0.38,0.017l-0.093,-0.003l-0.287,-0.014Zm23.345,0.014l-0.093,0.003l0.38,-0.017l-0.287,0.014Zm-24.084,-0.048l0.394,0.018l-0.186,-0.008l-0.208,-0.01Zm24.902,0.01l-0.186,0.008l0.394,-0.018l-0.208,0.01Zm-25.63,-0.047l0.397,0.02l-0.279,-0.013l-0.118,-0.007Zm26.448,0.007l-0.279,0.013l0.397,-0.02l-0.118,0.007Zm0.818,-0.043l-0.362,0.019l0.321,-0.017l0.378,-0.021l-0.337,0.019Zm-27.925,0.002l0.321,0.017l-0.362,-0.019l-0.337,-0.019l0.378,0.021Zm28.741,-0.048l-0.16,0.009l0.406,-0.023l-0.246,0.014Zm-29.844,-0.014l0.406,0.023l-0.16,-0.009l-0.246,-0.014Zm-0.722,-0.043l0.405,0.024l-0.253,-0.014l-0.152,-0.01Zm31.382,0.01l-0.253,0.014l0.405,-0.024l-0.152,0.01Zm-32.071,-0.053l0.365,0.023l-0.34,-0.021l-0.342,-0.022l0.317,0.02Zm32.887,0.002l-0.34,0.021l0.365,-0.023l0.317,-0.02l-0.342,0.022Zm0.814,-0.053l-0.122,0.008l0.387,-0.026l-0.265,0.018Zm-34.755,-0.018l0.387,0.026l-0.122,-0.008l-0.265,-0.018Zm-0.721,-0.05l0.38,0.027l-0.208,-0.014l-0.172,-0.013Zm36.29,0.013l-0.208,0.014l0.38,-0.027l-0.172,0.013Zm-37.009,-0.064l0.349,0.025l-0.271,-0.019l-0.078,-0.006Zm37.822,0.006l-0.271,0.019l0.349,-0.025l-0.078,0.006Zm-38.789,-0.079l0.306,0.023l-0.074,-0.005l-0.232,-0.018Zm39.602,0.018l-0.074,0.005l0.306,-0.023l-0.232,0.018Zm0.811,-0.063l-0.146,0.011l0.311,-0.025l-0.165,0.014Zm-41.157,-0.014l0.311,0.025l-0.146,-0.011l-0.165,-0.014Zm-0.725,-0.059l0.264,0.022l-0.186,-0.015l-0.078,-0.007Zm42.694,0.007l-0.186,0.015l0.264,-0.022l-0.078,0.007Zm-43.492,-0.074l0.079,0.007l-0.013,-0.001l-0.066,-0.006Zm44.302,0.006l-0.013,0.001l0.079,-0.007l-0.066,0.006Zm0.81,-0.071l-0.072,0.006l0.181,-0.016l-0.109,0.01Zm-45.965,-0.01l0.181,0.016l-0.072,-0.006l-0.109,-0.01Zm-0.75,-0.068l0.135,0.013l-0.084,-0.008l-0.051,-0.005Zm47.523,0.005l-0.084,0.008l0.135,-0.013l-0.051,0.005Zm-63.736,-2.025c-122.319,-19.226 -216,-125.203 -216,-252.887c0,-141.29 114.71,-256 256,-256c141.29,0 256,114.71 256,256c0,127.684 -93.681,233.661 -216,252.887l0,-178.887l59.65,0l11.35,-74l-71,0l0,-48.021c0,-20.245 9.918,-39.979 41.719,-39.979l32.281,0l0,-63c0,0 -29.296,-5 -57.305,-5c-58.476,0 -96.695,35.44 -96.695,99.6l0,56.4l-65,0l0,74l65,0l0,178.887Z"/></svg>Facebook
-                </button>
-                <button id="GoogleLogin">
-                    <img
-                        src="images/Google.png"
-                        alt="Google"
-                    />Google
-                </button>
-                <div class="switchArea"><span>Don't have an account?</span><a class="signUpBtn"> Sign Up</a></div>
-            </div>
+        <div>
+            <div class="colorBar2"></div>
+            <span>John's Map</span>
         </div>
-        <div class="signUpArea signArea" style='display: none'>
-            <h2>Let's Get Started!</h2>
-            <form action="">
-                <div>
-                    <img
-                        src="images/user.png"
-                        alt="user"
-                        width="15px"
-                    /><input type="text" placeholder="Name" autocomplete="off" />
-                </div>
-                <div>
-                    <img
-                        src="images/email.png"
-                        alt="user"
-                        width="15px"
-                    /><input type="email" placeholder="Email" autocomplete="off" />
-                </div>
-                <div>
-                    <img
-                        src="images/password.png"
-                        alt="password"
-                        width="15px"
-                    /><input
-                        class="passwordInput"
-                        type="password"
-                        placeholder="Password"
-                        autocomplete="off"
-                    />
-                </div>
-                <div>
-                    <img
-                        src="images/password.png"
-                        alt="password"
-                        width="15px"
-                    /><input
-                        class="passwordInput"
-                        type="password"
-                        placeholder="Confirm Password"
-                        autocomplete="off"
-                    />
-                </div>
-                <button id="signUp">CREATE</button>
-            </form>
-            <br />
-            <br />
-            <div class="switchArea"><span>Already have an account?</span><a class="signInBtn"> Login</a></div>
+        <div>
+            <div class="colorBar3"></div>
+            <span>Mary's Map</span>
         </div>
     </div>
-        <div class="infoBox">
-            <div><select class="choices" data-type="select-one"></select></div>
-            <div class="country" style="display: none">
-                <div class="flag">
-                    <img id="countryImg" onerror="this.src=''">
-                    <div class="stars">
-                        <img src="images/star-full.png">
-                        <img src="images/star-full.png">
-                        <img src="images/star-full.png">
-                        <img src="images/star-full.png">
-                        <img src="images/star-full.png">
-                    </div>
-                </div>
-                <div class="infoHead">
-                    <div><h3 id="name"></h3></div>
-                    <div class="btnGroup">
-                        <svg id="visted" data="0" viewBox="0 0 30 30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M25.9,8.6l-0.8-0.8c-1.2-1.2-2.9-1.5-4.5-0.9l-7.9,3L9.3,6.4c-0.5-0.5-1.2-1-1.8-1.3L5.6,4.2  C5,3.9,4.4,4,3.9,4.4l0,0C3.5,4.9,3.4,5.5,3.7,6.1l0.9,1.8c0.3,0.7,0.8,1.3,1.3,1.8l3.4,3.4l-3,7.9c-0.6,1.5-0.2,3.3,0.9,4.5  l0.8,0.8l5.8-8.7l5,4.2l-0.7,2.8c-0.2,0.7,0,1.5,0.6,2l1.4,1.4l2.2-5.2l5.2-2.2l-1.4-1.4c-0.5-0.5-1.3-0.7-2-0.6l-2.8,0.7l-4.2-5  L25.9,8.6z"/></svg>
-                        <svg id="wishlist" data="0" viewBox="0 0 30 30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M20,6h-2V4h-6v2h-2V4c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V6z M27,10v13c0,1.1-0.9,2-2,2h-1c0,0.6-0.4,1-1,1h-2  c-0.6,0-1-0.4-1-1H10c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1H5c-1.1,0-2-0.9-2-2V10c0-1.1,0.9-2,2-2h20C26.1,8,27,8.9,27,10z M7,14  c0,1.1,0.9,2,2,2s2-0.9,2-2c0-1.1-0.9-2-2-2S7,12.9,7,14z M14.4,20l-1.1-2.8L8.6,19l1.1,2.8L14.4,20z M20.7,17.5l2.8-2.8l-4.2-4.2  l-2.8,2.8L20.7,17.5z"/></svg>
-                    </div>
-                </div>
-                <h4>Capital: <span id="capital"></span></h4>
-                <div class="topic">
-                    <span>Geography</span>
-                    <div>Area: <span id="area"></span></div>
-                    <div>Coastline: <span id="coastline"></span></div>
-                    <div>Highest Point: <span id="highest"></span></div>
-                    <div>
-                        Climate:
-                        <span id="climate"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="topic">
-                    <span>People</span>
-                    <div>
-                        Population:
-                        <span id="population"></span>
-                    </div>
-                    <div>Ethnic groups: <span id="ethnic"></span></div>
-                    <div>
-                        Languages:
-                        <span id="language"></span>
-                    </div>
-                    <div>
-                        Religions:
-                        <span id="religion"></span>
-                    </div>
-                    <div>
-                        Urbanization:
-                        <span id="urban"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="topic">
-                    <span>Economy</span>
-                    <div>
-                        Real GDP:
-                        <span id="GDP"></span>
-                    </div>
-                    <div>
-                        Unemployment:
-                        <span id="unemployment"></span>
-                    </div>
-                    <div>
-                        Currency:
-                        <span id="currency"></span>
-                    </div>
-                    <div>
-                        Trade Balance:
-                        <span id="trade"></span>
-                    </div>
-                </div>
-                <br />
-                <div class="topic">
-                    <span>Communication</span>
-                    <div>Time Zone: <span id="time"></span></div>
-                    <div>Telephones: <span id="tele"></span></div>
-                    <div>Internet: <span id="net"></span></div>
+    <div class="signInArea signArea" style="display: none">
+        <h2>Welcome back!</h2>
+        <form>
+            <div>
+                <img src="images/user.png" alt="user" width="15px" /><input type="email" placeholder="Email"
+                    autocomplete="on" />
+            </div>
+            <div>
+                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
+                    type="password" placeholder="Password" autocomplete="on" />
+                <span class="eye"><img src="./images/invisible.png" /></span>
+            </div>
+            <div style="display: inline-block">
+                <input type="checkbox" value="lsRememberMe" id="rememberMe" checked />
+                <label for="rememberMe">Remember me</label>
+            </div>
+            <button id="signIn">LOG IN</button>
+        </form>
+        <br />
+        <div class="bridge"><span>Or connect using</span></div>
+        <button id="FBLogin">
+            <svg fill="white" style="
+                        fill-rule: evenodd;
+                        clip-rule: evenodd;
+                        stroke-linejoin: round;
+                        stroke-miterlimit: 2;
+                    " version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                    d="M255.022,511.998l0.229,0.001l-0.079,0l-0.15,-0.001Zm1.806,0.001l-0.079,0l0.229,-0.001l-0.15,0.001Zm-2.588,-0.005l0.247,0.001l-0.142,0l-0.105,-0.001Zm3.415,0.001l-0.142,0l0.247,-0.001l-0.105,0.001Zm-4.169,-0.007l0.165,0.001l-0.132,-0.001l-0.033,0Zm4.995,0l-0.132,0.001l0.165,-0.001l-0.033,0Zm0.826,-0.009l-0.058,0.001l0.223,-0.003l-0.165,0.002Zm-6.779,-0.002l0.223,0.003l-0.058,-0.001l-0.165,-0.002Zm7.604,-0.01l-0.135,0.002l0.275,-0.004l-0.14,0.002Zm-8.404,-0.002l0.275,0.004l-0.135,-0.002l-0.14,-0.002Zm9.228,-0.012l-0.182,0.003l0.254,-0.005l-0.072,0.002Zm-9.984,-0.002l0.254,0.005l-0.182,-0.003l-0.072,-0.002Zm-0.937,-0.019l0.225,0.005l-0.04,-0.001l-0.185,-0.004Zm11.745,0.004l-0.04,0.001l0.225,-0.005l-0.185,0.004Zm-12.567,-0.025l0.309,0.008l-0.125,-0.003l-0.184,-0.005Zm13.39,0.005l-0.125,0.003l0.309,-0.008l-0.184,0.005Zm0.823,-0.022l-0.201,0.006l0.316,-0.009l-0.115,0.003Zm-14.967,-0.003l0.316,0.009l-0.201,-0.006l-0.115,-0.003Zm-0.72,-0.022l0.225,0.007l-0.212,-0.007l-0.194,-0.006l0.181,0.006Zm16.509,0l-0.212,0.007l0.225,-0.007l0.181,-0.006l-0.194,0.006Zm0.821,-0.027l-0.112,0.004l0.345,-0.012l-0.233,0.008Zm-18.371,-0.008l0.345,0.012l-0.112,-0.004l-0.233,-0.008Zm-0.749,-0.028l0.362,0.013l-0.201,-0.007l-0.161,-0.006Zm19.941,0.006l-0.201,0.007l0.362,-0.013l-0.161,0.006Zm-20.676,-0.036l0.354,0.015l-0.277,-0.011l-0.077,-0.004Zm21.495,0.004l-0.277,0.011l0.354,-0.015l-0.077,0.004Zm-22.525,-0.049l0.38,0.017l-0.093,-0.003l-0.287,-0.014Zm23.345,0.014l-0.093,0.003l0.38,-0.017l-0.287,0.014Zm-24.084,-0.048l0.394,0.018l-0.186,-0.008l-0.208,-0.01Zm24.902,0.01l-0.186,0.008l0.394,-0.018l-0.208,0.01Zm-25.63,-0.047l0.397,0.02l-0.279,-0.013l-0.118,-0.007Zm26.448,0.007l-0.279,0.013l0.397,-0.02l-0.118,0.007Zm0.818,-0.043l-0.362,0.019l0.321,-0.017l0.378,-0.021l-0.337,0.019Zm-27.925,0.002l0.321,0.017l-0.362,-0.019l-0.337,-0.019l0.378,0.021Zm28.741,-0.048l-0.16,0.009l0.406,-0.023l-0.246,0.014Zm-29.844,-0.014l0.406,0.023l-0.16,-0.009l-0.246,-0.014Zm-0.722,-0.043l0.405,0.024l-0.253,-0.014l-0.152,-0.01Zm31.382,0.01l-0.253,0.014l0.405,-0.024l-0.152,0.01Zm-32.071,-0.053l0.365,0.023l-0.34,-0.021l-0.342,-0.022l0.317,0.02Zm32.887,0.002l-0.34,0.021l0.365,-0.023l0.317,-0.02l-0.342,0.022Zm0.814,-0.053l-0.122,0.008l0.387,-0.026l-0.265,0.018Zm-34.755,-0.018l0.387,0.026l-0.122,-0.008l-0.265,-0.018Zm-0.721,-0.05l0.38,0.027l-0.208,-0.014l-0.172,-0.013Zm36.29,0.013l-0.208,0.014l0.38,-0.027l-0.172,0.013Zm-37.009,-0.064l0.349,0.025l-0.271,-0.019l-0.078,-0.006Zm37.822,0.006l-0.271,0.019l0.349,-0.025l-0.078,0.006Zm-38.789,-0.079l0.306,0.023l-0.074,-0.005l-0.232,-0.018Zm39.602,0.018l-0.074,0.005l0.306,-0.023l-0.232,0.018Zm0.811,-0.063l-0.146,0.011l0.311,-0.025l-0.165,0.014Zm-41.157,-0.014l0.311,0.025l-0.146,-0.011l-0.165,-0.014Zm-0.725,-0.059l0.264,0.022l-0.186,-0.015l-0.078,-0.007Zm42.694,0.007l-0.186,0.015l0.264,-0.022l-0.078,0.007Zm-43.492,-0.074l0.079,0.007l-0.013,-0.001l-0.066,-0.006Zm44.302,0.006l-0.013,0.001l0.079,-0.007l-0.066,0.006Zm0.81,-0.071l-0.072,0.006l0.181,-0.016l-0.109,0.01Zm-45.965,-0.01l0.181,0.016l-0.072,-0.006l-0.109,-0.01Zm-0.75,-0.068l0.135,0.013l-0.084,-0.008l-0.051,-0.005Zm47.523,0.005l-0.084,0.008l0.135,-0.013l-0.051,0.005Zm-63.736,-2.025c-122.319,-19.226 -216,-125.203 -216,-252.887c0,-141.29 114.71,-256 256,-256c141.29,0 256,114.71 256,256c0,127.684 -93.681,233.661 -216,252.887l0,-178.887l59.65,0l11.35,-74l-71,0l0,-48.021c0,-20.245 9.918,-39.979 41.719,-39.979l32.281,0l0,-63c0,0 -29.296,-5 -57.305,-5c-58.476,0 -96.695,35.44 -96.695,99.6l0,56.4l-65,0l0,74l65,0l0,178.887Z" />
+            </svg>Facebook
+        </button>
+        <button id="GoogleLogin">
+            <img src="images/Google.png" alt="Google" />Google
+        </button>
+        <div class="switchArea">
+            <span>Don't have an account?</span><a class="signUpBtn"> Sign Up</a>
+        </div>
+    </div>
+    <div class="signUpArea signArea" style="display: none">
+        <h2>Let's Get Started!</h2>
+        <form>
+            <div>
+                <img src="images/user.png" alt="user" width="15px" /><input type="text" placeholder="Name"
+                    autocomplete="off" />
+            </div>
+            <div>
+                <img src="images/email.png" alt="user" width="15px" /><input type="email" placeholder="Email"
+                    autocomplete="off" />
+            </div>
+            <div>
+                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
+                    type="password" placeholder="Password" autocomplete="off" />
+            </div>
+            <div>
+                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
+                    type="password" placeholder="Confirm Password" autocomplete="off" />
+            </div>
+            <button id="signUp">CREATE</button>
+        </form>
+        <br />
+        <br />
+        <div class="switchArea">
+            <span>Already have an account?</span><a class="signInBtn"> Login</a>
+        </div>
+    </div>
+    <div class="infoBox">
+        <div><select class="choices" data-type="select-one"></select></div>
+        <div class="country" style="display: none">
+            <div class="flag">
+                <img id="countryImg" onerror="this.src=''" />
+                <div class="stars">
+                    <img src="images/star-full.png" />
+                    <img src="images/star-full.png" />
+                    <img src="images/star-full.png" />
+                    <img src="images/star-full.png" />
+                    <img src="images/star-full.png" />
                 </div>
             </div>
-            <div class="globe">
-                <h3 class="infoHead" id="name">Earth</h3>
-                <div class="topic">
-                    <span>Geography</span>
-                    <div>Surface: <span>510.072 million sq km</span></div>
-                    <div>
-                        Land: <span>148.94 million sq km</span
-                        ><span style="font-size: small; color: darkgray">
-                            29.1%</span
-                        >
-                    </div>
-                    <div>
-                        Water: <span>361.132 million sq km</span
-                        ><span style="font-size: small; color: darkgray">
-                            70.9%</span
-                        >
-                    </div>
-                    <div>Coastline: <span>356,000 km</span></div>
-                    <div>
-                        Highest Point:
-                        <span
-                            >Mount Everest
-                            <span>8,848 m (China-Nepal)</span></span
-                        >
-                    </div>
-                    <div>
-                        Lowest Point:
-                        <span>Mariana Trench <span>-10,924 m</span></span>
-                    </div>
-                    <div>Average Elevation: <span>840 m</span></div>
+            <div class="infoHead">
+                <div>
+                    <h3 id="name"></h3>
                 </div>
-                <br />
-                <div class="topic">
-                    <span>People</span>
-                    <div>
-                        Population: <span>7,684,292,383 (July 2020 est.)</span>
-                    </div>
-                    <div>
-                        Urbanization:
-                        <span>56.2% of total population (2020)</span>
-                    </div>
-                    <div>
-                        Largest City:
-                        <span
-                            >Tokyo (Japan) - 37,393,000; New Delhi (India) -
-                            30,291,000; Shanghai (China) - 27,058,000; Sao Paulo
-                            (Brazil) - 22,043,000; Mexico City (Mexico) -
-                            21,782,000; Dhaka (Bangladesh) - 21,006,000; Cairo
-                            (Egypt) - 20,901,000; Beijing (China) - 20,463,000;
-                            Mumbai (India) - 20,411,000; Osaka (Japan) -
-                            19,165,000 (2020)</span
-                        >
-                    </div>
-                    <div>
-                        Religion:
-                        <span
-                            >Christian 31.2%, Muslim 24.1%, Hindu 15.1%,
-                            Buddhist 6.9%, folk religions 5.7%, Jewish 0.2%,
-                            other 0.8%, unaffiliated 16% (2015 est.)</span
-                        >
-                    </div>
+                <div class="btnGroup">
+                    <svg id="visted" data="0" viewBox="0 0 30 30" xml:space="preserve"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path
+                            d="M20,6h-2V4h-6v2h-2V4c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V6z M27,10v13c0,1.1-0.9,2-2,2h-1c0,0.6-0.4,1-1,1h-2  c-0.6,0-1-0.4-1-1H10c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1H5c-1.1,0-2-0.9-2-2V10c0-1.1,0.9-2,2-2h20C26.1,8,27,8.9,27,10z M7,14  c0,1.1,0.9,2,2,2s2-0.9,2-2c0-1.1-0.9-2-2-2S7,12.9,7,14z M14.4,20l-1.1-2.8L8.6,19l1.1,2.8L14.4,20z M20.7,17.5l2.8-2.8l-4.2-4.2  l-2.8,2.8L20.7,17.5z" />
+                    </svg>
+                    <svg id="wishlist" data="0" viewBox="0 0 512 512" xml:space="preserve"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path
+                            d="M365.4,59.628c60.56,0,109.6,49.03,109.6,109.47c0,109.47-109.6,171.8-219.06,281.271    C146.47,340.898,37,278.568,37,169.099c0-60.44,49.04-109.47,109.47-109.47c54.73,0,82.1,27.37,109.47,82.1    C283.3,86.999,310.67,59.628,365.4,59.628z" />
+                    </svg>
+                </div>
+            </div>
+            <h4>Capital: <span id="capital"></span></h4>
+            <div class="topic">
+                <span>Geography</span>
+                <div>Area: <span id="area"></span></div>
+                <div>Coastline: <span id="coastline"></span></div>
+                <div>Highest Point: <span id="highest"></span></div>
+                <div>
+                    Climate:
+                    <span id="climate"></span>
+                </div>
+            </div>
+            <br />
+            <div class="topic">
+                <span>People</span>
+                <div>
+                    Population:
+                    <span id="population"></span>
+                </div>
+                <div>Ethnic groups: <span id="ethnic"></span></div>
+                <div>
+                    Languages:
+                    <span id="language"></span>
+                </div>
+                <div>
+                    Religions:
+                    <span id="religion"></span>
+                </div>
+                <div>
+                    Urbanization:
+                    <span id="urban"></span>
+                </div>
+            </div>
+            <br />
+            <div class="topic">
+                <span>Economy</span>
+                <div>
+                    Real GDP:
+                    <span id="GDP"></span>
+                </div>
+                <div>
+                    Unemployment:
+                    <span id="unemployment"></span>
+                </div>
+                <div>
+                    Currency:
+                    <span id="currency"></span>
+                </div>
+                <div>
+                    Trade Balance:
+                    <span id="trade"></span>
+                </div>
+            </div>
+            <br />
+            <div class="topic">
+                <span>Communication</span>
+                <div>Time Zone: <span id="time"></span></div>
+                <div>Telephones: <span id="tele"></span></div>
+                <div>Internet: <span id="net"></span></div>
+            </div>
+        </div>
+        <div class="globe">
+            <h3 class="infoHead" id="name">Earth</h3>
+            <div class="topic">
+                <span>Geography</span>
+                <div>Surface: <span>510.072 million sq km</span></div>
+                <div>
+                    Land: <span>148.94 million sq km</span>
+                    <span style="font-size: small; color: darkgray">29.1%</span>
+                </div>
+                <div>
+                    Water: <span>361.132 million sq km</span>
+                    <span style="font-size: small; color: darkgray">70.9%</span>
+                </div>
+                <div>Coastline: <span>356,000 km</span></div>
+                <div>
+                    Highest Point:
+                    <span>Mount Everest
+                        <span>8,848 m (China-Nepal)</span></span>
+                </div>
+                <div>
+                    Lowest Point:
+                    <span>Mariana Trench <span>-10,924 m</span></span>
+                </div>
+                <div>Average Elevation: <span>840 m</span></div>
+            </div>
+            <br />
+            <div class="topic">
+                <span>People</span>
+                <div>
+                    Population: <span>7,684,292,383 (July 2020 est.)</span>
+                </div>
+                <div>
+                    Urbanization:
+                    <span>56.2% of total population (2020)</span>
+                </div>
+                <div>
+                    Largest City:
+                    <span>Tokyo (Japan) - 37,393,000; New Delhi (India) -
+                        30,291,000; Shanghai (China) - 27,058,000; Sao Paulo
+                        (Brazil) - 22,043,000; Mexico City (Mexico) -
+                        21,782,000; Dhaka (Bangladesh) - 21,006,000; Cairo
+                        (Egypt) - 20,901,000; Beijing (China) - 20,463,000;
+                        Mumbai (India) - 20,411,000; Osaka (Japan) -
+                        19,165,000 (2020)</span>
+                </div>
+                <div>
+                    Religion:
+                    <span>Christian 31.2%, Muslim 24.1%, Hindu 15.1%,
+                        Buddhist 6.9%, folk religions 5.7%, Jewish 0.2%,
+                        other 0.8%, unaffiliated 16% (2015 est.)</span>
                 </div>
             </div>
         </div>
-        <footer></footer>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
-        <script src="https://d3js.org/d3.v6.js"></script>
-        <script src="https://unpkg.com/topojson@3"></script>
-        <script src="https://unpkg.com/versor"></script>
-        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script src="js/index.js"></script>
-        <script src="js/login.js"></script>
-        <script src="js/wishlist.js"></script>
-    </body>
+    </div>
+    <footer></footer>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://unpkg.com/versor"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/index.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/wishlist.js"></script>
+</body>
+
 </html>

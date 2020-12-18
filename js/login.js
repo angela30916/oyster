@@ -1,3 +1,4 @@
+/* global db */
 const firebaseConfig = {
     apiKey: 'AIzaSyB_u7VRtuCAfVSIBhwYcYLJwiZBJpH9-qo',
     authDomain: 'oyster-anping.firebaseapp.com',
@@ -134,13 +135,16 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then((results) => {
             firebase
                 .auth()
                 .currentUser.updateProfile({
                     displayName: `${username}`,
                 })
                 .then(() => {
+                    db.collection('users')
+                        .doc(`${results.user.uid}`)
+                        .set({ visited: [], wishlist: [] })
                     signUpArea.style.display = 'none'
                     Swal.fire({
                         title: 'Signed up sucessfully!',
@@ -310,14 +314,9 @@ signOutBtn.addEventListener('click', () => {
 function checkLoginStatus() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            // User is signed in
-            var uid = user.uid
-            console.log(uid)
             memberBtn.style.display = 'none'
             signOutBtn.style.display = 'inline-block'
         } else {
-            // User is signed out
-            console.log('User is signed out!')
             memberBtn.style.display = 'inline-block'
             signOutBtn.style.display = 'none'
         }

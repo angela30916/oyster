@@ -85,8 +85,8 @@ h3 {
     position: fixed;
     top: 80px;
     right: 40px;
+    min-height: 300px;
     width: 300px;
-    height: 50%;
     z-index: 100;
     background: #eee;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -94,6 +94,14 @@ h3 {
     border-radius: 10px;
     padding: 5px 10px;
     text-align: center;
+    animation: flip 1s;
+}
+
+@keyframes flip {
+    from {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
 }
 
 .signArea h2 {
@@ -189,7 +197,7 @@ label[for='rememberMe']:before {
 #signIn:hover,
 #signUp:hover {
     color: #000;
-    background-color: #7785a9;
+    background-color: #ddca03;
 }
 
 .switchArea > span {
@@ -336,4 +344,13 @@ label[for='rememberMe']:before {
     width: 10px;
     height: 10px;
     background-color: yellow;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
 }
