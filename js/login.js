@@ -1,4 +1,4 @@
-/* global db */
+/* global db, userData */
 const firebaseConfig = {
     apiKey: 'AIzaSyB_u7VRtuCAfVSIBhwYcYLJwiZBJpH9-qo',
     authDomain: 'oyster-anping.firebaseapp.com',
@@ -144,7 +144,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
                 .then(() => {
                     db.collection('users')
                         .doc(`${results.user.uid}`)
-                        .set({ visited: [], wishlist: [] })
+                        .set({ name: `${username}`, visited: [], wishlist: [] })
                     signUpArea.style.display = 'none'
                     Swal.fire({
                         title: 'Signed up sucessfully!',
@@ -233,6 +233,7 @@ document.querySelector('#FBLogin').addEventListener('click', (e) => {
         .auth()
         .signInWithPopup(provider)
         .then(function (result) {
+            signUpArea.style.display = 'none'
             signInArea.style.display = 'none'
             const user = result.user
             Swal.fire({
@@ -242,6 +243,25 @@ document.querySelector('#FBLogin').addEventListener('click', (e) => {
                 confirmButtonColor: '#566492',
                 confirmButtonText: 'OK',
             })
+            userData
+                .doc(`${user.uid}`)
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        return
+                    } else {
+                        db.collection('users')
+                            .doc(`${result.user.uid}`)
+                            .set({
+                                name: `${user.displayName}`,
+                                visited: [],
+                                wishlist: [],
+                            })
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error getting document:', error)
+                })
         })
         .catch(function (error) {
             const errorMessage = error.message
@@ -272,6 +292,25 @@ document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
                 confirmButtonColor: '#566492',
                 confirmButtonText: 'OK',
             })
+            userData
+                .doc(`${user.uid}`)
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        return
+                    } else {
+                        db.collection('users')
+                            .doc(`${result.user.uid}`)
+                            .set({
+                                name: `${user.displayName}`,
+                                visited: [],
+                                wishlist: [],
+                            })
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error getting document:', error)
+                })
         })
         .catch(function (error) {
             const errorMessage = error.message

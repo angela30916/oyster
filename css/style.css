@@ -329,21 +329,28 @@ label[for='rememberMe']:before {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: #5bd4cf;
 }
 
 .colorBar2 {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: orange;
+    background-color: #ff7979;
 }
 
 .colorBar3 {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: yellow;
+    background-color: #d1d1d1;
+}
+
+.colorBar4 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #f2cc8f;
 }
 
 ::-webkit-scrollbar {

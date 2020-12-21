@@ -1,4 +1,4 @@
-/* global userData */
+/* global userData, colorCountry */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -52,12 +52,14 @@ function reset() {
     globe.style.display = 'block'
     country.style.display = 'none'
     countries.transition().style('fill', null)
+
     svg.transition()
         .duration(500)
         .call(
             zoom.transform,
             d3.zoomIdentity,
-            d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
+            d3.zoomTransform(svg.node()).invert([width / 2, height / 2]),
+            colorCountry()
         )
 }
 
@@ -66,6 +68,7 @@ function clicked(event, d) {
     event.stopPropagation()
     countries.transition().style('fill', null)
     d3.select(this).transition().style('fill', '#ddca03')
+    // colorCountry()
     svg.transition()
         .duration(750)
         .call(
@@ -177,10 +180,8 @@ let ids = [
 ]
 
 function getCountryInfo(code, continent, name) {
-    const visitedBtn = document.querySelector('#visted path')
+    const visitedBtn = document.querySelector('#visited path')
     const wishlistBtn = document.querySelector('#wishlist path')
-    const visitedSVG = document.querySelector('#visted')
-    const wishlistSVG = document.querySelector('#wishlist')
 
     const user = firebase.auth().currentUser
     if (user) {
@@ -193,18 +194,18 @@ function getCountryInfo(code, continent, name) {
                 const wishlist = doc.data().wishlist.includes(`${name}`)
                 if (visited) {
                     visitedBtn.style.fill = '#5bd4cf'
-                    visitedSVG.setAttribute('data', '1')
+                    visitedBtn.setAttribute('data', '1')
                 } else {
                     visitedBtn.style.fill = '#fff'
-                    visitedSVG.setAttribute('data', '0')
+                    visitedBtn.setAttribute('data', '0')
                 }
 
                 if (wishlist) {
                     wishlistBtn.style.fill = '#ff7979'
-                    wishlistSVG.setAttribute('data', '1')
+                    wishlistBtn.setAttribute('data', '1')
                 } else {
                     wishlistBtn.style.fill = '#fff'
-                    wishlistSVG.setAttribute('data', '0')
+                    wishlistBtn.setAttribute('data', '0')
                 }
             })
     } else {
@@ -225,7 +226,7 @@ function getCountryInfo(code, continent, name) {
         .then((countryInfo) => {
             globe.style.display = 'none'
             country.style.display = 'block'
-            reset()
+            resetID()
 
             let contentList = [
                 name,
@@ -295,7 +296,7 @@ function getCountryInfo(code, continent, name) {
                 }
             }
 
-            function reset() {
+            function resetID() {
                 ids.forEach((id) => {
                     document.getElementById(id).parentNode.style.display =
                         'block'

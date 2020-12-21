@@ -1,6 +1,8 @@
+/* global countries */
 const db = firebase.firestore()
 const userData = db.collection('users')
-// const countryData = db.collection('countries')
+const visitedBtn = document.querySelector('#visited path')
+const wishlistBtn = document.querySelector('#wishlist path')
 
 function addVisitedCountry(uid, country) {
     userData.doc(`${uid}`).update({
@@ -26,30 +28,37 @@ function removeWishlistCountry(uid, country) {
     })
 }
 
-const vistedBtn = document.querySelector('#visted')
-vistedBtn.addEventListener('click', (e) => {
+visitedBtn.addEventListener('click', (e) => {
     const user = firebase.auth().currentUser
     if (user) {
         const uid = user.uid
         const countryName =
-            e.currentTarget.parentNode.previousElementSibling.firstElementChild
-                .textContent
-        if (e.currentTarget.getAttribute('data') === '0') {
+            e.currentTarget.parentNode.parentNode.previousElementSibling
+                .firstElementChild.textContent
+        if (wishlistBtn.getAttribute('data') === '1') {
+            Swal.fire({
+                title: 'You can only choose one!',
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+            return
+        } else if (e.currentTarget.getAttribute('data') === '0') {
             e.currentTarget.setAttribute('data', '1')
-            e.target.style.fill = '#5bd4cf'
-            const countriesNode = d3.selectAll('path title')._groups[0]
-            const countriesList = Object.keys(countriesNode)
-                .map((key) => [countriesNode[key]])
-                .map((item) => item[0].textContent)
-            const index = countriesList.findIndex(
-                (country) => country === countryName
-            )
-            const target = countriesNode[index].parentNode
-            target.style.fill = '#5bd4cf'
+            e.currentTarget.style.fill = '#5bd4cf'
+            // const countriesNode = d3.selectAll('path title')._groups[0]
+            // const countriesList = Object.keys(countriesNode)
+            //     .map((key) => [countriesNode[key]])
+            //     .map((item) => item[0].textContent)
+            // const index = countriesList.findIndex(
+            //     (country) => country === countryName
+            // )
+            // const target = countriesNode[index].parentNode
+            // target.style.fill = '#5bd4cf'
             addVisitedCountry(uid, countryName)
         } else {
             e.currentTarget.setAttribute('data', '0')
-            e.target.style.fill = '#fff'
+            e.currentTarget.style.fill = '#fff'
             removeVisitedCountry(uid, countryName)
         }
     } else {
@@ -60,30 +69,37 @@ vistedBtn.addEventListener('click', (e) => {
     }
 })
 
-const wishlistBtn = document.querySelector('#wishlist')
 wishlistBtn.addEventListener('click', (e) => {
     const user = firebase.auth().currentUser
     if (user) {
         const uid = user.uid
         const countryName =
-            e.currentTarget.parentNode.previousElementSibling.firstElementChild
-                .textContent
-        if (e.currentTarget.getAttribute('data') === '0') {
+            e.currentTarget.parentNode.parentNode.previousElementSibling
+                .firstElementChild.textContent
+        if (visitedBtn.getAttribute('data') === '1') {
+            Swal.fire({
+                title: 'You can only choose one!',
+                icon: 'error',
+                confirmButtonColor: '#566492',
+                confirmButtonText: 'OK',
+            })
+            return
+        } else if (e.currentTarget.getAttribute('data') === '0') {
             e.currentTarget.setAttribute('data', '1')
-            e.target.style.fill = '#ff7979'
-            const countriesNode = d3.selectAll('path title')._groups[0]
-            const countriesList = Object.keys(countriesNode)
-                .map((key) => [countriesNode[key]])
-                .map((item) => item[0].textContent)
-            const index = countriesList.findIndex(
-                (country) => country === countryName
-            )
-            const target = countriesNode[index].parentNode
-            target.style.fill = '#ff7979'
+            e.currentTarget.style.fill = '#ff7979'
+            // const countriesNode = d3.selectAll('path title')._groups[0]
+            // const countriesList = Object.keys(countriesNode)
+            //     .map((key) => [countriesNode[key]])
+            //     .map((item) => item[0].textContent)
+            // const index = countriesList.findIndex(
+            //     (country) => country === countryName
+            // )
+            // const target = countriesNode[index].parentNode
+            // target.style.fill = '#ff7979'
             addWishlistCountry(uid, countryName)
         } else {
             e.currentTarget.setAttribute('data', '0')
-            e.target.style.fill = '#fff'
+            e.currentTarget.style.fill = '#fff'
             removeWishlistCountry(uid, countryName)
         }
     } else {
@@ -137,3 +153,34 @@ exploreBtn.addEventListener('click', () => {
 //         })
 //     })
 // }
+
+function colorCountry() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            userData
+                .doc(`${user.uid}`)
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        var wishlist = doc.data().wishlist
+                        var visited = doc.data().visited
+                        countries.style('fill', function (d) {
+                            return visited.includes(d.properties.name)
+                                ? '#5bd4cf'
+                                : wishlist.includes(d.properties.name)
+                                ? '#ff7979'
+                                : '#566492'
+                        })
+                    } else {
+                        console.log('No such document!')
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error getting document:', error)
+                })
+        } else {
+            return
+        }
+    })
+}
+colorCountry()
