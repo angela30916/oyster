@@ -1,4 +1,4 @@
-/* global userData, colorCountry */
+/* global userData */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -10,10 +10,34 @@ const projection = d3
     .translate([width / 2, height / 2])
 const path = d3.geoPath().projection(projection)
 const svg = d3.select('svg').attr('viewBox', [-100, 0, width, height])
+
+/* mainGraient */
+const svgDefs = svg.append('defs')
+const mainGradient = svgDefs
+    .append('linearGradient')
+    .attr('id', 'mainGradient')
+    .attr('x1', '0%')
+    .attr('x2', '0%')
+    .attr('y1', '0%')
+    .attr('y2', '100%')
+
+mainGradient
+    .append('stop')
+    .attr('offset', '0%')
+    .attr('stop-color', '#fcfdfe')
+    .attr('stop-opacity', 1)
+
+mainGradient
+    .append('stop')
+    .attr('offset', '100%')
+    .attr('stop-color', '#d6d7d8')
+    .attr('stop-opacity', 1)
+/* mainGraient */
+
 const g = svg.append('g')
 g.append('path')
-    .attr('fill', 'none')
     .attr('d', path({ type: 'Sphere' }))
+    .attr('fill', 'url(#mainGradient)')
 let countries
 
 const country = document.querySelector('.country')
@@ -45,13 +69,18 @@ function render(land) {
                     )
                 )
             )
+        colorCountry()
     })
 }
 
 function reset() {
     globe.style.display = 'block'
     country.style.display = 'none'
-    countries.transition().style('fill', null)
+    firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+            countries.transition().style('fill', null)
+        }
+    })
 
     svg.transition()
         .duration(500)
@@ -68,7 +97,6 @@ function clicked(event, d) {
     event.stopPropagation()
     countries.transition().style('fill', null)
     d3.select(this).transition().style('fill', '#ddca03')
-    // colorCountry()
     svg.transition()
         .duration(750)
         .call(
@@ -152,7 +180,7 @@ function dragged(event) {
 
     // In vicinity of the antipode (unstable) of q0, restart.
     if (delta[0] < 0.7) dragstarted.apply(this, [event, this])
-    svg.selectAll('path').attr('d', path)
+    svg.selectAll('svg>g>g>path').attr('d', path)
 }
 
 const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', zoomed)
@@ -390,6 +418,36 @@ function searchCountry() {
                     })
                 })(countryData)
             })
+        }
+    })
+}
+
+function colorCountry() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            userData
+                .doc(`${user.uid}`)
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        var wishlist = doc.data().wishlist
+                        var visited = doc.data().visited
+                        countries.style('fill', function (d) {
+                            return visited.includes(d.properties.name)
+                                ? '#5bd4cf'
+                                : wishlist.includes(d.properties.name)
+                                ? '#ff7979'
+                                : '#566492'
+                        })
+                    } else {
+                        console.log('No such document!')
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error getting document:', error)
+                })
+        } else {
+            return
         }
     })
 }

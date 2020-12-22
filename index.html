@@ -20,6 +20,7 @@
     </header>
     <svg></svg>
     <div class="exploreArea" style="display: none">
+        <select></select>
         <div>
             <div class="colorBar1"></div>
             <span>My Visited Countries</span>
@@ -30,11 +31,11 @@
         </div>
         <div>
             <div class="colorBar3"></div>
-            <span>Who's Visited Countries</span>
+            <span id="otherVisited">Other's Visited Countries</span>
         </div>
         <div>
             <div class="colorBar4"></div>
-            <span>Who's Bucket List</span>
+            <span id="otherWishlist">Other's Bucket List</span>
         </div>
     </div>
     <div class="signInArea signArea" style="display: none">
@@ -134,64 +135,80 @@
                     </svg>
                 </div>
             </div>
-            <h4>Capital: <span id="capital"></span></h4>
-            <div class="topic">
-                <span>Geography</span>
-                <div>Area: <span id="area"></span></div>
-                <div>Coastline: <span id="coastline"></span></div>
-                <div>Highest Point: <span id="highest"></span></div>
-                <div>
-                    Climate:
-                    <span id="climate"></span>
-                </div>
+            <div id="comment">
+                <h4>Capital: <span id="capital"></span></h4>
+                <span id="commentBtn">Comments</span>
             </div>
-            <br />
-            <div class="topic">
-                <span>People</span>
-                <div>
-                    Population:
-                    <span id="population"></span>
+            <div id="commentArea" style="display: none">
+                <div class="input" style="display:none">
+                    <textarea id="commentSend" type="text" placeholder="Leave your comments..."></textarea>
+                    <div class="submit-comment">
+                        <button>Submit</button>
+                    </div>
                 </div>
-                <div>Ethnic groups: <span id="ethnic"></span></div>
-                <div>
-                    Languages:
-                    <span id="language"></span>
-                </div>
-                <div>
-                    Religions:
-                    <span id="religion"></span>
-                </div>
-                <div>
-                    Urbanization:
-                    <span id="urban"></span>
-                </div>
+                <div class="comment">hi</div>
+                <div class="comment">hi</div>
+                <div class="comment">hi</div>
             </div>
-            <br />
-            <div class="topic">
-                <span>Economy</span>
-                <div>
-                    Real GDP:
-                    <span id="GDP"></span>
+            <div class="details">
+                <div class="topic">
+                    <span>Geography</span>
+                    <div>Area: <span id="area"></span></div>
+                    <div>Coastline: <span id="coastline"></span></div>
+                    <div>Highest Point: <span id="highest"></span></div>
+                    <div>
+                        Climate:
+                        <span id="climate"></span>
+                    </div>
                 </div>
-                <div>
-                    Unemployment:
-                    <span id="unemployment"></span>
+                <br />
+                <div class="topic">
+                    <span>People</span>
+                    <div>
+                        Population:
+                        <span id="population"></span>
+                    </div>
+                    <div>Ethnic groups: <span id="ethnic"></span></div>
+                    <div>
+                        Languages:
+                        <span id="language"></span>
+                    </div>
+                    <div>
+                        Religions:
+                        <span id="religion"></span>
+                    </div>
+                    <div>
+                        Urbanization:
+                        <span id="urban"></span>
+                    </div>
                 </div>
-                <div>
-                    Currency:
-                    <span id="currency"></span>
+                <br />
+                <div class="topic">
+                    <span>Economy</span>
+                    <div>
+                        Real GDP:
+                        <span id="GDP"></span>
+                    </div>
+                    <div>
+                        Unemployment:
+                        <span id="unemployment"></span>
+                    </div>
+                    <div>
+                        Currency:
+                        <span id="currency"></span>
+                    </div>
+                    <div>
+                        Trade Balance:
+                        <span id="trade"></span>
+                    </div>
                 </div>
-                <div>
-                    Trade Balance:
-                    <span id="trade"></span>
+                <br />
+                <div class="topic">
+                    <span>Communication</span>
+                    <div>Time Zone: <span id="time"></span></div>
+                    <div>Telephones: <span id="tele"></span></div>
+                    <div>Internet: <span id="net"></span></div>
                 </div>
-            </div>
-            <br />
-            <div class="topic">
-                <span>Communication</span>
-                <div>Time Zone: <span id="time"></span></div>
-                <div>Telephones: <span id="tele"></span></div>
-                <div>Internet: <span id="net"></span></div>
             </div>
         </div>
         <div class="globe">
