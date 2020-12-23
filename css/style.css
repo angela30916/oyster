@@ -26,7 +26,7 @@ header {
 
 .nav:hover {
     cursor: pointer;
-    color: #ddca03;
+    color: #ddca03 !important;
 }
 
 footer {
@@ -42,7 +42,7 @@ svg {
 }
 
 span {
-    color: #ddca03;
+    color: #fff;
 }
 
 a {
@@ -310,19 +310,27 @@ label[for='rememberMe']:before {
     margin-top: 20px;
 }
 
-.stars img {
+.stars svg {
     width: 30px;
+    fill: #ffc108;
 }
 
 .exploreArea {
     position: absolute;
     bottom: 50px;
     right: 30px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .colorBar {
     width: 30px;
     height: 30px;
+}
+
+.exploreArea span {
+    color: #000;
 }
 
 .colorBar1 {
@@ -380,10 +388,19 @@ label[for='rememberMe']:before {
 
 .comment {
     border: 1px solid #eee;
-    height: 70px;
+    height: 120px;
     margin: 15px 0;
     padding: 10px;
     background-color: #eee;
+    color: #000;
+}
+
+.comment span {
+    color: inherit;
+}
+
+.commentStar svg {
+    width: 15px;
 }
 
 .input textarea {
@@ -416,12 +433,12 @@ label[for='rememberMe']:before {
     background-color: #979797;
 }
 
-.star {
+/* .star {
     display: inline-block;
     margin-top: 30px;
 }
 
-.star img {
+.star svg {
     width: 30px;
     cursor: pointer;
-}
+} */

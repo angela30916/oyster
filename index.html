@@ -22,19 +22,19 @@
     <div class="exploreArea" style="display: none">
         <select></select>
         <div>
-            <div class="colorBar1"></div>
+            <div class="colorBar1 colorBar"></div>
             <span>My Visited Countries</span>
         </div>
         <div>
-            <div class="colorBar2"></div>
+            <div class="colorBar2 colorBar"></div>
             <span>My Bucket List</span>
         </div>
         <div>
-            <div class="colorBar3"></div>
+            <div class="colorBar3 colorBar"></div>
             <span id="otherVisited">Other's Visited Countries</span>
         </div>
         <div>
-            <div class="colorBar4"></div>
+            <div class="colorBar4 colorBar"></div>
             <span id="otherWishlist">Other's Bucket List</span>
         </div>
     </div>
@@ -111,11 +111,26 @@
             <div class="flag">
                 <img id="countryImg" onerror="this.src=''" />
                 <div class="stars">
-                    <img src="images/star-full.png" />
-                    <img src="images/star-full.png" />
-                    <img src="images/star-full.png" />
-                    <img src="images/star-full.png" />
-                    <img src="images/star-full.png" />
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+                    </svg>
                 </div>
             </div>
             <div class="infoHead">
@@ -146,9 +161,6 @@
                         <button>Submit</button>
                     </div>
                 </div>
-                <div class="comment">hi</div>
-                <div class="comment">hi</div>
-                <div class="comment">hi</div>
             </div>
             <div class="details">
                 <div class="topic">

@@ -113,6 +113,7 @@ exploreBtn.addEventListener('click', () => {
     const user = firebase.auth().currentUser
     if (user) {
         if (exploreArea.style.display === 'none') {
+            exploreBtn.style.color = '#ddca03'
             exploreArea.style.display = 'block'
             let nameID = new Map()
             let visitedlists = []
@@ -190,6 +191,7 @@ exploreBtn.addEventListener('click', () => {
             })
         } else {
             exploreArea.style.display = 'none'
+            exploreBtn.style.color = '#7785a9'
             document.querySelector('#otherVisited').textContent =
                 "Other's Visited Countries"
             document.querySelector('#otherWishlist').textContent =

@@ -1,4 +1,4 @@
-/* global userData */
+/* global userData, details, commentArea */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -38,6 +38,8 @@ const g = svg.append('g')
 g.append('path')
     .attr('d', path({ type: 'Sphere' }))
     .attr('fill', 'url(#mainGradient)')
+    .attr('stroke', '#eee')
+    .attr('stroke-width', '0.5')
 let countries
 
 const country = document.querySelector('.country')
@@ -48,6 +50,9 @@ function render(land) {
         countries = g
             .append('g')
             .attr('fill', '#566492')
+            .attr('stroke', '#eee')
+            .attr('stroke-width', '.2')
+            .attr('stroke-opacity', '.5')
             .attr('cursor', 'pointer')
             .selectAll('path')
             .data(topojson.feature(world, world.objects.countries).features)
@@ -112,6 +117,9 @@ function clicked(event, d) {
                 .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
             d3.pointer(event, svg.node())
         )
+    details.style.display = 'block'
+    commentArea.style.display = 'none'
+    resetCommentArea()
     const name = event.currentTarget.textContent
     d3.json('./db/country_code.json').then((results) => {
         const countryCode = flattenObject(results)
@@ -450,6 +458,11 @@ function colorCountry() {
             return
         }
     })
+}
+
+function resetCommentArea() {
+    document.querySelectorAll('.comment').forEach((e) => e.remove())
+    document.querySelector('#noComment')?.remove()
 }
 
 d3.select('svg')
