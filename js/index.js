@@ -1,4 +1,4 @@
-/* global userData, details, commentArea */
+/* global userData, details, commentArea, resetCommentArea */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -402,6 +402,8 @@ function searchCountry() {
                                 .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
                             // d3.pointer(event, svg.node())
                         )
+                    details.style.display = 'block'
+                    commentArea.style.display = 'none'
                     d3.json('./db/country_code.json').then((results) => {
                         const countryCode = flattenObject(results)
                         const code = getKeyByValue(
@@ -458,11 +460,6 @@ function colorCountry() {
             return
         }
     })
-}
-
-function resetCommentArea() {
-    document.querySelectorAll('.comment').forEach((e) => e.remove())
-    document.querySelector('#noComment')?.remove()
 }
 
 d3.select('svg')

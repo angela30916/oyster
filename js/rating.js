@@ -9,10 +9,10 @@ const inputArea = document.querySelector('.input')
 let commentList = [countryData.get().then((querySnapshot) => querySnapshot)]
 
 commentBtn.addEventListener('click', () => {
+    resetCommentArea()
     if (details.style.display !== 'none') {
         details.style.display = 'none'
         commentArea.style.display = 'block'
-
         const countryComments = commentList.filter(
             (l) => document.querySelector('#name').textContent === l.id
         )[0]
@@ -124,7 +124,12 @@ function setUUID() {
     )
 }
 
-;(function updateCommentList() {
+function resetCommentArea() {
+    document.querySelectorAll('.comment')?.forEach((e) => e.remove())
+    document.querySelector('#noComment')?.remove()
+}
+
+(function updateCommentList() {
     countryData.onSnapshot((res) => {
         res.docChanges().forEach((change) => {
             const doc = { ...change.doc.data(), id: change.doc.id }
@@ -150,7 +155,7 @@ function setUUID() {
                     break
             }
         })
-
+        resetCommentArea()
         const countryComments = commentList.filter(
             (l) => document.querySelector('#name').textContent === l.id
         )[0]
@@ -162,7 +167,36 @@ function setUUID() {
               )
             : null
         countryComments?.pop()
-        // TODO
-        console.log(countryComments)
+        const length = countryComments?.length
+        if (length > 0) {
+            for (let i = 0; i < length; i++) {
+                d3.select('#commentArea').append('div').attr('class', 'comment')
+            }
+            countryComments.forEach((comment, i) => {
+                const fullStar = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffc108"
+                    d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+            </svg>`.repeat(comment.rating)
+                const emptyStar = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#dadce0"
+                    d="M21.82,10.74,16.7,14.45l2,6a1,1,0,0,1-.37,1.12,1,1,0,0,1-1.17,0L12,17.87,6.88,21.59a1,1,0,0,1-1.17,0,1,1,0,0,1-.37-1.12l2-6L2.18,10.74a1,1,0,0,1,.59-1.81H9.09l2-6a1,1,0,0,1,1.9,0l2,6h6.32a1,1,0,0,1,.59,1.81Z" />
+            </svg>`.repeat(5 - comment.rating)
+                const commentTemplate = `
+                <div class="commenter"><b>${comment.name}</b></div>
+                <div class="commentStar">
+                    ${fullStar}${emptyStar}
+                </div>
+                <div><span>${comment.comment}</span></div>
+            `
+                document.querySelectorAll('.comment')[
+                    i
+                ].innerHTML = commentTemplate
+            })
+        } else {
+            commentArea.insertAdjacentHTML(
+                'afterend',
+                '<center id="noComment"><b>Be the first to comment!</b></center>'
+            )
+        }
     })
 })()
