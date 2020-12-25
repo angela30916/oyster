@@ -404,6 +404,7 @@ function searchCountry() {
                         )
                     details.style.display = 'block'
                     commentArea.style.display = 'none'
+                    resetCommentArea()
                     d3.json('./db/country_code.json').then((results) => {
                         const countryCode = flattenObject(results)
                         const code = getKeyByValue(

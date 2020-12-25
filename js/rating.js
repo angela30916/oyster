@@ -7,9 +7,12 @@ const submitBtn = document.querySelector('.submit-comment button')
 const commentInput = document.querySelector('#commentSend')
 const inputArea = document.querySelector('.input')
 let commentList = [countryData.get().then((querySnapshot) => querySnapshot)]
+let starsSend = 0
 
 commentBtn.addEventListener('click', () => {
     resetCommentArea()
+    clearCommentStar()
+    starsSend = 0
     if (details.style.display !== 'none') {
         details.style.display = 'none'
         commentArea.style.display = 'block'
@@ -63,6 +66,7 @@ commentBtn.addEventListener('click', () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             inputArea.style.display = 'block'
+            calculateCommentStar()
         } else {
             inputArea.style.display = 'none'
         }
@@ -73,6 +77,7 @@ submitBtn.addEventListener('click', () => {
     const user = firebase.auth().currentUser
     const userName = user.displayName
     const countryName = document.querySelector('#name').textContent
+    const star = starsSend
     if (!commentInput.value) {
         Swal.fire({
             title: 'Please leave your comments!',
@@ -80,29 +85,48 @@ submitBtn.addEventListener('click', () => {
             confirmButtonColor: '#566492',
             confirmButtonText: 'OK',
         })
+    } else if (star === 0) {
+        Swal.fire({
+            title: 'Please leave your ratings!',
+            icon: 'error',
+            confirmButtonColor: '#566492',
+            confirmButtonText: 'OK',
+        })
     } else {
-        countryData
-            .doc(`${countryName}`)
-            .set(
-                {
-                    [setUUID()]: {
-                        name: `${userName}`,
-                        comment: `${commentInput.value}`,
-                        rating: Math.floor(Math.random() * 5) + 1,
-                    },
-                },
-                { merge: true }
-            )
-            .then(
+        Swal.fire({
+            title: 'Is it correct?',
+            text: `${'⭐'.repeat(star)} ${commentInput.value}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#566492',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit!',
+        }).then((result) => {
+            if (result.isConfirmed) {
                 Swal.fire({
                     title: 'Submitted!',
-                    text: `${commentInput.value}`,
                     icon: 'success',
                     confirmButtonColor: '#566492',
                     confirmButtonText: 'OK',
-                }),
-                (commentInput.value = '')
-            )
+                })
+                countryData
+                    .doc(`${countryName}`)
+                    .set(
+                        {
+                            [setUUID()]: {
+                                name: `${userName}`,
+                                comment: `${commentInput.value}`,
+                                rating: star,
+                            },
+                        },
+                        { merge: true }
+                    )
+                    .then(() => {
+                        commentInput.value = ''
+                        clearCommentStar()
+                    })
+            }
+        })
     }
 })
 
@@ -129,7 +153,7 @@ function resetCommentArea() {
     document.querySelector('#noComment')?.remove()
 }
 
-(function updateCommentList() {
+;(function updateCommentList() {
     countryData.onSnapshot((res) => {
         res.docChanges().forEach((change) => {
             const doc = { ...change.doc.data(), id: change.doc.id }
@@ -200,3 +224,52 @@ function resetCommentArea() {
         }
     })
 })()
+
+function calculateCommentStar() {
+    const stars = document.querySelectorAll('.starsSend span')
+    const css = document.querySelector('#css4star')
+    const style = css.sheet
+    stars.forEach((star) => {
+        star.addEventListener('click', () => {
+            starsSend = +star.getAttribute('value')
+            const length = style.rules.length
+            if (length !== 0) {
+                for (let i = 0; i < length; i++) {
+                    style.deleteRule(0)
+                }
+            }
+            for (let i = 0; i < starsSend; i++) {
+                style.insertRule(
+                    `#star${i + 1}::before{color: #ffc108 !important;}`
+                )
+            }
+        })
+    })
+}
+
+function clearCommentStar() {
+    starsSend = 0
+    const css = document.querySelector('#css4star')
+    const style = css.sheet
+    const length = style.rules.length
+    if (length !== 0) {
+        for (let i = 0; i < length; i++) {
+            style.deleteRule(0)
+        }
+    }
+}
+
+/* function showRatings(ratings) {
+    const starsTotal = 5
+    for (let rating in ratings) {
+        // Get percentage
+        const starPercentage = (ratings[rating] / starsTotal) * 100
+        // Round to nearest 10
+        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`
+        // Set width of stars-inner to percentage
+        document.querySelector(
+            `main .${rating} .stars-inner`
+        ).style.width = starPercentageRounded
+    }
+}
+ */

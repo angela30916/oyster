@@ -8,7 +8,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <style id="css4star"></style>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
         <div class="login nav" style="display: none"><a>LOG IN</a></div>
         <div class="logout nav" style="display: none"><a>LOG OUT</a></div>
     </header>
-    <svg></svg>
+    <svg id="earth"></svg>
     <div class="exploreArea" style="display: none">
         <select></select>
         <div>
@@ -156,6 +158,13 @@
             </div>
             <div id="commentArea" style="display: none">
                 <div class="input" style="display:none">
+                    <div class="starsSend">
+                        <span id="star1" value="1"></span>
+                        <span id="star2" value="2"></span>
+                        <span id="star3" value="3"></span>
+                        <span id="star4" value="4"></span>
+                        <span id="star5" value="5"></span>
+                    </div>
                     <textarea id="commentSend" type="text" placeholder="Leave your comments..."></textarea>
                     <div class="submit-comment">
                         <button>Submit</button>
