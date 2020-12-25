@@ -1,4 +1,4 @@
-/* global db */
+/* global db, showRatings */
 const countryData = db.collection('countries')
 const commentBtn = document.querySelector('#commentBtn')
 const details = document.querySelector('.details')
@@ -222,6 +222,20 @@ function resetCommentArea() {
                 '<center id="noComment"><b>Be the first to comment!</b></center>'
             )
         }
+
+        let ratings = commentList.filter(
+            (l) => document.querySelector('#name').textContent === l.id
+        )[0]
+            ? Object.values(
+                  commentList.filter(
+                      (l) =>
+                          document.querySelector('#name').textContent === l.id
+                  )[0]
+              )
+            : null
+        ratings?.pop()
+        ratings = ratings ? ratings.map((r) => +r.rating) : null
+        showRatings(ratings)
     })
 })()
 
@@ -258,18 +272,3 @@ function clearCommentStar() {
         }
     }
 }
-
-/* function showRatings(ratings) {
-    const starsTotal = 5
-    for (let rating in ratings) {
-        // Get percentage
-        const starPercentage = (ratings[rating] / starsTotal) * 100
-        // Round to nearest 10
-        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`
-        // Set width of stars-inner to percentage
-        document.querySelector(
-            `main .${rating} .stars-inner`
-        ).style.width = starPercentageRounded
-    }
-}
- */

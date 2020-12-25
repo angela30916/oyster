@@ -320,16 +320,6 @@ label[for='rememberMe']:before {
     justify-content: space-between;
 }
 
-.stars {
-    display: inline-block;
-    margin-top: 20px;
-}
-
-.stars svg {
-    width: 30px;
-    fill: #ffc108;
-}
-
 .exploreArea {
     position: absolute;
     bottom: 50px;
@@ -474,4 +464,61 @@ label[for='rememberMe']:before {
 
 .starsSend > span:hover ~ span:before {
     color: #fff;
+}
+
+.ave-rating {
+    line-height: 20px;
+}
+.ave-rating .stars {
+    display: inline-block;
+}
+.ave-rating .stars img {
+    width: 20px;
+}
+.ave-rating .score {
+    display: inline-block;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.ave-rating .count {
+    color: #979797;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.avestars {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* stars */
+.stars-outer {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.stars-outer::before {
+    content: '\f005 \f005 \f005 \f005 \f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 100;
+    font-size: 25px;
+    color: #ffc108;
+}
+
+.stars-inner::before {
+    content: '\f005 \f005 \f005 \f005 \f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 25px;
+    color: #ffc108;
 }

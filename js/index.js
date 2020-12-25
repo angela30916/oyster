@@ -1,4 +1,4 @@
-/* global userData, details, commentArea, resetCommentArea */
+/* global userData, commentList, details, commentArea, resetCommentArea */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -114,8 +114,8 @@ function clicked(event, d) {
                         0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)
                     )
                 )
-                .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-            d3.pointer(event, svg.node())
+                .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+            // d3.pointer(event, svg.node())
         )
     details.style.display = 'block'
     commentArea.style.display = 'none'
@@ -127,6 +127,12 @@ function clicked(event, d) {
         if (code) {
             const resultList = code.split('.')
             getCountryInfo(`${resultList[1]}`, `${resultList[0]}`, name)
+            let ratings = commentList.filter((l) => name === l.id)[0]
+                ? Object.values(commentList.filter((l) => name === l.id)[0])
+                : null
+            ratings?.pop()
+            ratings = ratings ? ratings.map((r) => +r.rating) : null
+            showRatings(ratings)
         } else {
             Swal.fire({
                 title: 'Sorry, no matching infomation!',
@@ -418,6 +424,20 @@ function searchCountry() {
                                 `${resultList[0]}`,
                                 selectedCountry
                             )
+                            let ratings = commentList.filter(
+                                (l) => selectedCountry === l.id
+                            )[0]
+                                ? Object.values(
+                                      commentList.filter(
+                                          (l) => selectedCountry === l.id
+                                      )[0]
+                                  )
+                                : null
+                            ratings?.pop()
+                            ratings = ratings
+                                ? ratings.map((r) => +r.rating)
+                                : null
+                            showRatings(ratings)
                         } else {
                             Swal.fire({
                                 title: 'Sorry, no matching infomation!',
@@ -461,6 +481,22 @@ function colorCountry() {
             return
         }
     })
+}
+
+function showRatings(ratings) {
+    if (ratings) {
+        const sum = ratings.reduce((a, b) => a + b, 0)
+        const starPercentage = (sum / ratings.length / 5) * 100
+        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`
+        const avgStar = ((Math.round(starPercentage / 10) * 10) / 100) * 5
+        document.querySelector(
+            '.stars-inner'
+        ).style.width = starPercentageRounded
+        document.querySelector('#rating-score').textContent = `${avgStar}`
+    } else {
+        document.querySelector('.stars-inner').style.width = 0
+        document.querySelector('#rating-score').textContent = '0'
+    }
 }
 
 d3.select('svg')
