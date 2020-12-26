@@ -37,13 +37,13 @@ visitedBtn.addEventListener('click', (e) => {
             Swal.fire({
                 title: 'You can only choose one!',
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
             return
         } else if (e.currentTarget.getAttribute('data') === '0') {
             e.currentTarget.setAttribute('data', '1')
-            e.currentTarget.style.fill = '#5bd4cf'
+            e.currentTarget.style.fill = '#00798c'
             // const countriesNode = d3.selectAll('path title')._groups[0]
             // const countriesList = Object.keys(countriesNode)
             //     .map((key) => [countriesNode[key]])
@@ -52,7 +52,7 @@ visitedBtn.addEventListener('click', (e) => {
             //     (country) => country === countryName
             // )
             // const target = countriesNode[index].parentNode
-            // target.style.fill = '#5bd4cf'
+            // target.style.fill = '#00798c'
             addVisitedCountry(uid, countryName)
         } else {
             e.currentTarget.setAttribute('data', '0')
@@ -62,7 +62,7 @@ visitedBtn.addEventListener('click', (e) => {
     } else {
         Swal.fire({
             title: 'Please log in first!',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
         })
     }
 })
@@ -76,7 +76,7 @@ wishlistBtn.addEventListener('click', (e) => {
             Swal.fire({
                 title: 'You can only choose one!',
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
             return
@@ -101,7 +101,7 @@ wishlistBtn.addEventListener('click', (e) => {
     } else {
         Swal.fire({
             title: 'Please log in first!',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
         })
     }
 })
@@ -113,7 +113,7 @@ exploreBtn.addEventListener('click', () => {
     const user = firebase.auth().currentUser
     if (user) {
         if (exploreArea.style.display === 'none') {
-            exploreBtn.style.color = '#ddca03'
+            exploreBtn.style.color = '#edae49'
             exploreArea.style.display = 'block'
             let nameID = new Map()
             let visitedlists = []
@@ -160,7 +160,7 @@ exploreBtn.addEventListener('click', () => {
                                             return visited.includes(
                                                 d.properties.name
                                             )
-                                                ? '#5bd4cf'
+                                                ? '#00798c'
                                                 : wishlist.includes(
                                                       d.properties.name
                                                   )
@@ -173,7 +173,7 @@ exploreBtn.addEventListener('click', () => {
                                                       d.properties.name
                                                   )
                                                 ? '#f2cc8f'
-                                                : '#566492'
+                                                : '#003d5b'
                                         })
                                     } else {
                                         console.log('No such document!')
@@ -191,7 +191,7 @@ exploreBtn.addEventListener('click', () => {
             })
         } else {
             exploreArea.style.display = 'none'
-            exploreBtn.style.color = '#7785a9'
+            exploreBtn.style.color = '#fff'
             document.querySelector('#otherVisited').textContent =
                 "Other's Visited Countries"
             document.querySelector('#otherWishlist').textContent =
@@ -201,7 +201,7 @@ exploreBtn.addEventListener('click', () => {
     } else {
         Swal.fire({
             title: 'Please log in first!',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
         })
     }
 })

@@ -4,7 +4,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #3b4568;
+    background-color: #2a3e4f;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -15,7 +15,7 @@ header {
     position: absolute;
     top: 40px;
     right: 30px;
-    color: #7785a9;
+    color: #fff;
     font-size: 16px;
 }
 
@@ -26,7 +26,7 @@ header {
 
 .nav:hover {
     cursor: pointer;
-    color: #ddca03 !important;
+    color: #edae49 !important;
 }
 
 footer {
@@ -34,7 +34,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 10px;
-    background-color: #566492;
+    background-color: #003d5b;
 }
 
 svg {
@@ -86,8 +86,9 @@ h3 {
 }
 
 .infoHead {
-    margin-top: 10px;
-    border-bottom: 1px solid #ddca03;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #edae49;
     display: flex;
     justify-content: space-between;
 }
@@ -135,7 +136,7 @@ h3 {
 }
 
 .signArea input:focus {
-    border: 0.5px solid #566492;
+    border: 0.5px solid #003d5b;
 }
 
 .signArea input[type='checkbox'] {
@@ -166,7 +167,7 @@ label[for='rememberMe']:before {
 [type='checkbox']:checked + label[for='rememberMe']:before {
     content: '';
     border: 2px solid #ccc;
-    background: #566492;
+    background: #003d5b;
     border-radius: 4px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -199,7 +200,7 @@ label[for='rememberMe']:before {
     border: 0;
     outline: none;
     border-radius: 30px;
-    background-color: #566492;
+    background-color: #003d5b;
     color: #fff;
     vertical-align: middle;
     line-height: 40px;
@@ -212,7 +213,7 @@ label[for='rememberMe']:before {
 #signIn:hover,
 #signUp:hover {
     color: #000;
-    background-color: #ddca03;
+    background-color: #edae49;
 }
 
 .switchArea > span {
@@ -221,7 +222,7 @@ label[for='rememberMe']:before {
 
 .switchArea > a {
     font-weight: bold;
-    color: #566492;
+    color: #003d5b;
     cursor: pointer;
 }
 
@@ -278,7 +279,7 @@ label[for='rememberMe']:before {
     left: 40px;
     width: 400px;
     height: 85%;
-    background-color: #7785a9;
+    background-color: #30638e;
     color: #eee;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -342,7 +343,7 @@ label[for='rememberMe']:before {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: #5bd4cf;
+    background-color: #00798c;
 }
 
 .colorBar2 {
@@ -388,7 +389,7 @@ label[for='rememberMe']:before {
 }
 
 #commentBtn:hover {
-    color: #ddca03;
+    color: #edae49;
 }
 
 .comment {
@@ -482,7 +483,6 @@ label[for='rememberMe']:before {
     margin-right: 5px;
 }
 .ave-rating .count {
-    color: #979797;
     font-size: 16px;
     display: inline-block;
 }
@@ -521,4 +521,38 @@ label[for='rememberMe']:before {
     font-weight: 900;
     font-size: 25px;
     color: #ffc108;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 100;
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

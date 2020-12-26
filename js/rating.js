@@ -82,14 +82,14 @@ submitBtn.addEventListener('click', () => {
         Swal.fire({
             title: 'Please leave your comments!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
     } else if (star === 0) {
         Swal.fire({
             title: 'Please leave your ratings!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
     } else {
@@ -98,7 +98,7 @@ submitBtn.addEventListener('click', () => {
             text: `${'⭐'.repeat(star)} ${commentInput.value}`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, submit!',
         }).then((result) => {
@@ -106,7 +106,7 @@ submitBtn.addEventListener('click', () => {
                 Swal.fire({
                     title: 'Submitted!',
                     icon: 'success',
-                    confirmButtonColor: '#566492',
+                    confirmButtonColor: '#003d5b',
                     confirmButtonText: 'OK',
                 })
                 countryData
@@ -153,7 +153,7 @@ function resetCommentArea() {
     document.querySelector('#noComment')?.remove()
 }
 
-;(function updateCommentList() {
+(function updateCommentList() {
     countryData.onSnapshot((res) => {
         res.docChanges().forEach((change) => {
             const doc = { ...change.doc.data(), id: change.doc.id }

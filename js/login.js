@@ -102,7 +102,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please fill in your name!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -110,7 +110,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please check your email address!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -118,7 +118,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please set up your password!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -126,7 +126,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please check your password again!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -150,7 +150,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
                         title: 'Signed up sucessfully!',
                         text: `Hello, ${username}!`,
                         icon: 'success',
-                        confirmButtonColor: '#566492',
+                        confirmButtonColor: '#003d5b',
                         confirmButtonText: 'OK',
                     })
                 })
@@ -161,7 +161,7 @@ document.querySelector('#signUp').addEventListener('click', (e) => {
                 title: 'Oops...',
                 text: `${errorMessage}`,
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })
@@ -183,7 +183,7 @@ document.querySelector('#signIn').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please check your email address!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -191,7 +191,7 @@ document.querySelector('#signIn').addEventListener('click', (e) => {
         Swal.fire({
             title: 'Please fill in your password!',
             icon: 'error',
-            confirmButtonColor: '#566492',
+            confirmButtonColor: '#003d5b',
             confirmButtonText: 'OK',
         })
         return
@@ -209,7 +209,7 @@ document.querySelector('#signIn').addEventListener('click', (e) => {
                     ? `Welcome back, ${user.displayName}!`
                     : 'Welcome back!',
                 icon: 'success',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })
@@ -219,7 +219,7 @@ document.querySelector('#signIn').addEventListener('click', (e) => {
                 title: 'Oops...',
                 text: `${errorMessage}`,
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })
@@ -240,7 +240,7 @@ document.querySelector('#FBLogin').addEventListener('click', (e) => {
                 title: 'Sucessfully logged in with Facebook!',
                 text: `Hello, ${user.displayName}!`,
                 icon: 'success',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
             userData
@@ -269,7 +269,7 @@ document.querySelector('#FBLogin').addEventListener('click', (e) => {
                 title: 'Oops...',
                 text: `${errorMessage}`,
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })
@@ -289,7 +289,7 @@ document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
                 title: 'Sucessfully logged in with Google!',
                 text: `Hello, ${user.displayName}!`,
                 icon: 'success',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
             userData
@@ -318,7 +318,7 @@ document.querySelector('#GoogleLogin').addEventListener('click', (e) => {
                 title: 'Oops...',
                 text: `${errorMessage}`,
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })
@@ -333,7 +333,7 @@ signOutBtn.addEventListener('click', () => {
             Swal.fire({
                 title: 'You are logged out!',
                 icon: 'success',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             }).then(() => location.reload())
         })
@@ -343,7 +343,7 @@ signOutBtn.addEventListener('click', () => {
                 title: 'Oops...',
                 text: `${errorMessage}`,
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         })

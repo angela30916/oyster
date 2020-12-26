@@ -110,6 +110,29 @@
     <div class="infoBox">
         <div><select class="choices" data-type="select-one"></select></div>
         <div class="country" style="display: none">
+            <div class="infoHead">
+                <div>
+                    <h3 id="name"></h3>
+                </div>
+                <div class="btnGroup">
+                    <div class="tooltip">
+                        <svg id="visited" viewBox="0 0 30 30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path data="0"
+                                d="M20,6h-2V4h-6v2h-2V4c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V6z M27,10v13c0,1.1-0.9,2-2,2h-1c0,0.6-0.4,1-1,1h-2  c-0.6,0-1-0.4-1-1H10c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1H5c-1.1,0-2-0.9-2-2V10c0-1.1,0.9-2,2-2h20C26.1,8,27,8.9,27,10z M7,14  c0,1.1,0.9,2,2,2s2-0.9,2-2c0-1.1-0.9-2-2-2S7,12.9,7,14z M14.4,20l-1.1-2.8L8.6,19l1.1,2.8L14.4,20z M20.7,17.5l2.8-2.8l-4.2-4.2  l-2.8,2.8L20.7,17.5z" />
+                        </svg>
+                        <span class="tooltiptext">Visited List</span>
+                    </div>
+                    <div class="tooltip">
+                        <svg id="wishlist" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path data="0"
+                                d="M365.4,59.628c60.56,0,109.6,49.03,109.6,109.47c0,109.47-109.6,171.8-219.06,281.271    C146.47,340.898,37,278.568,37,169.099c0-60.44,49.04-109.47,109.47-109.47c54.73,0,82.1,27.37,109.47,82.1    C283.3,86.999,310.67,59.628,365.4,59.628z" />
+                        </svg>
+                        <span class="tooltiptext">Bucket List</span>
+                    </div>
+                </div>
+            </div>
             <div class="flag">
                 <img id="countryImg" onerror="this.src=''" />
                 <div class="ave-rating">
@@ -119,26 +142,10 @@
                         </div>
                     </div>
                     <span class="score" id="rating-score"></span>
-                    <a href="#comments-section" class="count comments-count"></a>
+                    <span class="count comments-count"></span>
                 </div>
             </div>
-            <div class="infoHead">
-                <div>
-                    <h3 id="name"></h3>
-                </div>
-                <div class="btnGroup">
-                    <svg id="visited" viewBox="0 0 30 30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path data="0"
-                            d="M20,6h-2V4h-6v2h-2V4c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V6z M27,10v13c0,1.1-0.9,2-2,2h-1c0,0.6-0.4,1-1,1h-2  c-0.6,0-1-0.4-1-1H10c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1H5c-1.1,0-2-0.9-2-2V10c0-1.1,0.9-2,2-2h20C26.1,8,27,8.9,27,10z M7,14  c0,1.1,0.9,2,2,2s2-0.9,2-2c0-1.1-0.9-2-2-2S7,12.9,7,14z M14.4,20l-1.1-2.8L8.6,19l1.1,2.8L14.4,20z M20.7,17.5l2.8-2.8l-4.2-4.2  l-2.8,2.8L20.7,17.5z" />
-                    </svg>
-                    <svg id="wishlist" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path data="0"
-                            d="M365.4,59.628c60.56,0,109.6,49.03,109.6,109.47c0,109.47-109.6,171.8-219.06,281.271    C146.47,340.898,37,278.568,37,169.099c0-60.44,49.04-109.47,109.47-109.47c54.73,0,82.1,27.37,109.47,82.1    C283.3,86.999,310.67,59.628,365.4,59.628z" />
-                    </svg>
-                </div>
-            </div>
+
             <div id="comment">
                 <h4>Capital: <span id="capital"></span></h4>
                 <span id="commentBtn">Comments</span>

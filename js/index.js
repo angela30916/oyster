@@ -49,7 +49,7 @@ function render(land) {
     d3.json(land).then((world) => {
         countries = g
             .append('g')
-            .attr('fill', '#566492')
+            .attr('fill', '#003d5b')
             .attr('stroke', '#eee')
             .attr('stroke-width', '.2')
             .attr('stroke-opacity', '.5')
@@ -101,7 +101,7 @@ function clicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d)
     event.stopPropagation()
     countries.transition().style('fill', null)
-    d3.select(this).transition().style('fill', '#ddca03')
+    d3.select(this).transition().style('fill', '#edae49')
     svg.transition()
         .duration(750)
         .call(
@@ -137,7 +137,7 @@ function clicked(event, d) {
             Swal.fire({
                 title: 'Sorry, no matching infomation!',
                 icon: 'error',
-                confirmButtonColor: '#566492',
+                confirmButtonColor: '#003d5b',
                 confirmButtonText: 'OK',
             })
         }
@@ -235,7 +235,7 @@ function getCountryInfo(code, continent, name) {
                 const visited = doc.data().visited.includes(`${name}`)
                 const wishlist = doc.data().wishlist.includes(`${name}`)
                 if (visited) {
-                    visitedBtn.style.fill = '#5bd4cf'
+                    visitedBtn.style.fill = '#00798c'
                     visitedBtn.setAttribute('data', '1')
                 } else {
                     visitedBtn.style.fill = '#fff'
@@ -272,7 +272,9 @@ function getCountryInfo(code, continent, name) {
 
             let contentList = [
                 name,
-                countryInfo.Government?.Capital?.name?.text ?? 'null',
+                countryInfo.Government?.Capital?.name?.text?.split(
+                    '; note'
+                )[0] ?? 'null',
                 countryInfo.Geography?.Area?.total?.text ?? 'null',
                 countryInfo.Geography?.Coastline?.text ?? 'null',
                 countryInfo.Geography?.Elevation?.['highest point']?.text ??
@@ -388,7 +390,7 @@ function searchCountry() {
                     const [[x0, y0], [x1, y1]] = path.bounds(d)
                     event.stopPropagation()
                     countries.transition().style('fill', null)
-                    d3.select(target).transition().style('fill', '#ddca03')
+                    d3.select(target).transition().style('fill', '#edae49')
                     svg.transition()
                         .duration(750)
                         .call(
@@ -442,7 +444,7 @@ function searchCountry() {
                             Swal.fire({
                                 title: 'Sorry, no matching infomation!',
                                 icon: 'error',
-                                confirmButtonColor: '#566492',
+                                confirmButtonColor: '#003d5b',
                                 confirmButtonText: 'OK',
                             })
                         }
@@ -465,10 +467,10 @@ function colorCountry() {
                         var visited = doc.data().visited
                         countries.style('fill', function (d) {
                             return visited.includes(d.properties.name)
-                                ? '#5bd4cf'
+                                ? '#00798c'
                                 : wishlist.includes(d.properties.name)
                                 ? '#ff7979'
-                                : '#566492'
+                                : '#003d5b'
                         })
                     } else {
                         console.log('No such document!')
@@ -486,16 +488,17 @@ function colorCountry() {
 function showRatings(ratings) {
     if (ratings) {
         const sum = ratings.reduce((a, b) => a + b, 0)
-        const starPercentage = (sum / ratings.length / 5) * 100
-        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`
-        const avgStar = ((Math.round(starPercentage / 10) * 10) / 100) * 5
-        document.querySelector(
-            '.stars-inner'
-        ).style.width = starPercentageRounded
+        const avgStar = Math.round((sum / ratings.length) * 10) / 10
+        const starPercentage = `${(avgStar / 5) * 100}%`
+        document.querySelector('.stars-inner').style.width = starPercentage
         document.querySelector('#rating-score').textContent = `${avgStar}`
+        document.querySelector(
+            '.comments-count'
+        ).textContent = `(${ratings.length})`
     } else {
         document.querySelector('.stars-inner').style.width = 0
         document.querySelector('#rating-score').textContent = '0'
+        document.querySelector('.comments-count').textContent = '(0)'
     }
 }
 
