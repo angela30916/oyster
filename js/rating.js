@@ -1,6 +1,7 @@
 /* global db, showRatings */
 const countryData = db.collection('countries')
 const commentBtn = document.querySelector('#commentBtn')
+const infoBtn = document.querySelector('#infoBtn')
 const details = document.querySelector('.details')
 const commentArea = document.querySelector('#commentArea')
 const submitBtn = document.querySelector('.submit-comment button')
@@ -10,10 +11,12 @@ let commentList = [countryData.get().then((querySnapshot) => querySnapshot)]
 let starsSend = 0
 
 commentBtn.addEventListener('click', () => {
-    resetCommentArea()
-    clearCommentStar()
-    starsSend = 0
     if (details.style.display !== 'none') {
+        resetCommentArea()
+        clearCommentStar()
+        starsSend = 0
+        infoBtn.classList.toggle('active')
+        commentBtn.classList.toggle('active')
         details.style.display = 'none'
         commentArea.style.display = 'block'
         const countryComments = commentList.filter(
@@ -59,9 +62,6 @@ commentBtn.addEventListener('click', () => {
                 '<center id="noComment"><b>Be the first to comment!</b></center>'
             )
         }
-    } else {
-        details.style.display = 'block'
-        commentArea.style.display = 'none'
     }
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -71,6 +71,15 @@ commentBtn.addEventListener('click', () => {
             inputArea.style.display = 'none'
         }
     })
+})
+
+infoBtn.addEventListener('click', () => {
+    if (commentArea.style.display !== 'none') {
+        infoBtn.classList.toggle('active')
+        commentBtn.classList.toggle('active')
+        details.style.display = 'block'
+        commentArea.style.display = 'none'
+    }
 })
 
 submitBtn.addEventListener('click', () => {
@@ -153,7 +162,7 @@ function resetCommentArea() {
     document.querySelector('#noComment')?.remove()
 }
 
-(function updateCommentList() {
+;(function updateCommentList() {
     countryData.onSnapshot((res) => {
         res.docChanges().forEach((change) => {
             const doc = { ...change.doc.data(), id: change.doc.id }

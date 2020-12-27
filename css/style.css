@@ -56,6 +56,10 @@ header {
     animation: fadein ease 3s;
 }
 
+#earth {
+    min-height: -webkit-fill-available;
+}
+
 span {
     color: #fff;
 }
@@ -86,9 +90,10 @@ h3 {
 }
 
 .infoHead {
-    margin-top: 15px;
+    margin-top: 30px;
+    margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #edae49;
+    border-bottom: 1px solid #fff;
     display: flex;
     justify-content: space-between;
 }
@@ -277,14 +282,25 @@ label[for='rememberMe']:before {
     position: fixed;
     top: 40px;
     left: 40px;
-    width: 400px;
+    width: 30%;
+    max-width: 400px;
     height: 85%;
+    max-height: 800px;
     background-color: #30638e;
     color: #eee;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
     padding: 25px;
     overflow-y: scroll;
+}
+
+@media (max-width: 480px) {
+    .infoBox {
+        top: auto;
+        bottom: 20px;
+        max-height: 30%;
+        width: 80%;
+    }
 }
 
 .topic > span {
@@ -319,6 +335,7 @@ label[for='rememberMe']:before {
 .flag {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 15px;
 }
 
 .exploreArea {
@@ -376,20 +393,23 @@ label[for='rememberMe']:before {
     height: 0px;
 }
 
-#comment {
+#btn {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 10px;
 }
 
-#commentBtn {
+#btn span {
     cursor: pointer;
     color: #fff;
     font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-#commentBtn:hover {
+#btn .active {
     color: #edae49;
+    border-bottom: 5px solid #edae49;
 }
 
 .comment {

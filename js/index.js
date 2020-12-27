@@ -1,4 +1,4 @@
-/* global userData, commentList, details, commentArea, resetCommentArea */
+/* global userData, commentList, details, commentArea, resetCommentArea, infoBtn, commentBtn */
 // const land50 = './db/countries-50m.json'
 const land110 = './db/countries-110m.json'
 const width = 975,
@@ -117,6 +117,8 @@ function clicked(event, d) {
                 .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
             // d3.pointer(event, svg.node())
         )
+    infoBtn.classList.add('active')
+    commentBtn.classList.remove('active')
     details.style.display = 'block'
     commentArea.style.display = 'none'
     resetCommentArea()
@@ -410,6 +412,8 @@ function searchCountry() {
                                 .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
                             // d3.pointer(event, svg.node())
                         )
+                    infoBtn.classList.add('active')
+                    commentBtn.classList.remove('active')
                     details.style.display = 'block'
                     commentArea.style.display = 'none'
                     resetCommentArea()
