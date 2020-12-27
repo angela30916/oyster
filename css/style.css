@@ -301,13 +301,21 @@ label[for='rememberMe']:before {
         max-height: 30%;
         width: 80%;
     }
+
+    .exploreArea {
+        top: 70px;
+        left: 20px;
+        width: 130px;
+        height: fit-content;
+    }
 }
 
 .topic > span {
-    color: #444;
+    color: #edae49;
     font-weight: bolder;
     border: 1px solid;
     padding: 1px 3px;
+    line-height: 2em;
 }
 
 .choices {

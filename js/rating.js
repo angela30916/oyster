@@ -75,6 +75,7 @@ commentBtn.addEventListener('click', () => {
 
 infoBtn.addEventListener('click', () => {
     if (commentArea.style.display !== 'none') {
+        resetCommentArea()
         infoBtn.classList.toggle('active')
         commentBtn.classList.toggle('active')
         details.style.display = 'block'
@@ -162,7 +163,7 @@ function resetCommentArea() {
     document.querySelector('#noComment')?.remove()
 }
 
-;(function updateCommentList() {
+(function updateCommentList() {
     countryData.onSnapshot((res) => {
         res.docChanges().forEach((change) => {
             const doc = { ...change.doc.data(), id: change.doc.id }
