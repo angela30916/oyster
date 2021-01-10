@@ -10,7 +10,18 @@
     "rules": {
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
-        "semi": ["error", "never"]
+        "semi": ["error", "never"],
+        "prefer-const": [
+            "error",
+            {
+                "destructuring": "any",
+                "ignoreReadBeforeAssign": false
+            }
+        ],
+        "no-global-assign": [
+            "error",
+            { "exceptions": ["countriesGroup", "comments"] }
+        ]
     },
     "globals": {
         "d3": "writable",

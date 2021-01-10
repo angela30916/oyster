@@ -17,30 +17,30 @@
     <header>
         <div class="nav"><a href="./">HOME</a></div>
         <div class="nav" id="exploreBtn"><a>EXPLORE</a></div>
-        <div class="login nav" style="display: none"><a>LOG IN</a></div>
-        <div class="logout nav" style="display: none"><a>LOG OUT</a></div>
+        <div class="nav" id="login" style="display: none"><a>LOG IN</a></div>
+        <div class="nav" id="logout" style="display: none"><a>LOG OUT</a></div>
     </header>
     <svg id="earth"></svg>
     <div class="exploreArea" style="display: none">
         <select></select>
         <div>
-            <div class="colorBar1 colorBar"></div>
+            <div class="colorBar" id="colorBar1"></div>
             <span>My Visited Countries</span>
         </div>
         <div>
-            <div class="colorBar2 colorBar"></div>
+            <div class="colorBar" id="colorBar2"></div>
             <span>My Bucket List</span>
         </div>
         <div>
-            <div class="colorBar3 colorBar"></div>
+            <div class="colorBar" id="colorBar3"></div>
             <span id="otherVisited">Other's Visited Countries</span>
         </div>
         <div>
-            <div class="colorBar4 colorBar"></div>
+            <div class="colorBar" id="colorBar4"></div>
             <span id="otherWishlist">Other's Bucket List</span>
         </div>
     </div>
-    <div class="signInArea signArea" style="display: none">
+    <div class="signArea" id="signInArea" style="display: none">
         <h2>Welcome back!</h2>
         <form>
             <div>
@@ -48,15 +48,15 @@
                     autocomplete="on" />
             </div>
             <div>
-                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
-                    type="password" placeholder="Password" autocomplete="on" />
+                <img src="images/password.png" alt="password" width="15px" /><input id="signInPassword" type="password"
+                    placeholder="Password" autocomplete="on" />
                 <span class="eye"><img src="./images/invisible.png" /></span>
             </div>
-            <div style="display: inline-block">
+            <div class="rememberMe">
                 <input type="checkbox" value="lsRememberMe" id="rememberMe" checked />
                 <label for="rememberMe">Remember me</label>
             </div>
-            <button id="signIn">LOG IN</button>
+            <button id="signInBtn">LOG IN</button>
         </form>
         <br />
         <div class="bridge"><span>Or connect using</span></div>
@@ -76,11 +76,11 @@
         <button id="GoogleLogin">
             <img src="images/Google.png" alt="Google" />Google
         </button>
-        <div class="switchArea">
-            <span>Don't have an account?</span><a class="signUpBtn"> Sign Up</a>
+        <div class="switchSignArea">
+            <span>Don't have an account?</span><a id="toSignUp"> Sign Up</a>
         </div>
     </div>
-    <div class="signUpArea signArea" style="display: none">
+    <div class="signArea" id="signUpArea" style="display: none">
         <h2>Let's Get Started!</h2>
         <form>
             <div>
@@ -92,24 +92,24 @@
                     autocomplete="off" />
             </div>
             <div>
-                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
-                    type="password" placeholder="Password" autocomplete="off" />
+                <img src="images/password.png" alt="password" width="15px" /><input id="signUpPassword" type="password"
+                    placeholder="Password" autocomplete="off" />
             </div>
             <div>
-                <img src="images/password.png" alt="password" width="15px" /><input class="passwordInput"
-                    type="password" placeholder="Confirm Password" autocomplete="off" />
+                <img src="images/password.png" alt="password" width="15px" /><input id="confirmPassword" type="password"
+                    placeholder="Confirm Password" autocomplete="off" />
             </div>
-            <button id="signUp">CREATE</button>
+            <button id="signUpBtn">CREATE</button>
         </form>
         <br />
         <br />
-        <div class="switchArea">
-            <span>Already have an account?</span><a class="signInBtn"> Login</a>
+        <div class="switchSignArea">
+            <span>Already have an account?</span><a id="toSignIn"> Log In</a>
         </div>
     </div>
     <div class="infoBox">
         <div><select class="choices" data-type="select-one"></select></div>
-        <div class="country" style="display: none">
+        <div id="countryInfoArea" style="display: none">
             <div class="infoHead">
                 <div>
                     <h3 id="name"></h3>
@@ -122,7 +122,7 @@
                             <path data="0"
                                 d="M20,6h-2V4h-6v2h-2V4c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V6z M27,10v13c0,1.1-0.9,2-2,2h-1c0,0.6-0.4,1-1,1h-2  c-0.6,0-1-0.4-1-1H10c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1H5c-1.1,0-2-0.9-2-2V10c0-1.1,0.9-2,2-2h20C26.1,8,27,8.9,27,10z M7,14  c0,1.1,0.9,2,2,2s2-0.9,2-2c0-1.1-0.9-2-2-2S7,12.9,7,14z M14.4,20l-1.1-2.8L8.6,19l1.1,2.8L14.4,20z M20.7,17.5l2.8-2.8l-4.2-4.2  l-2.8,2.8L20.7,17.5z" />
                         </svg>
-                        <span class="tooltiptext">Visited List</span>
+                        <span class="tooltipText">Visited List</span>
                     </div>
                     <div class="tooltip">
                         <svg id="wishlist" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -130,43 +130,42 @@
                             <path data="0"
                                 d="M365.4,59.628c60.56,0,109.6,49.03,109.6,109.47c0,109.47-109.6,171.8-219.06,281.271    C146.47,340.898,37,278.568,37,169.099c0-60.44,49.04-109.47,109.47-109.47c54.73,0,82.1,27.37,109.47,82.1    C283.3,86.999,310.67,59.628,365.4,59.628z" />
                         </svg>
-                        <span class="tooltiptext">Bucket List</span>
+                        <span class="tooltipText">Bucket List</span>
                     </div>
                 </div>
             </div>
             <div class="flag">
                 <img id="countryImg" onerror="this.src=''" />
                 <div class="ave-rating">
-                    <div class="avestars">
+                    <div class="aveStars">
                         <div class="stars-outer">
                             <div class="stars-inner"></div>
                         </div>
                     </div>
                     <span class="score" id="rating-score"></span>
-                    <span class="count comments-count"></span>
+                    <span class="count"></span>
                 </div>
             </div>
-
-            <div id="btn">
+            <div id="infoBoxBtn">
                 <span id="infoBtn" class="active">Information</span>
                 <span id="commentBtn">Comment</span>
             </div>
             <div id="commentArea" style="display: none">
-                <div class="input" style="display:none">
-                    <div class="starsSend">
+                <div class="commentInput" style="display:none">
+                    <div class="stars">
                         <span id="star1" value="1"></span>
                         <span id="star2" value="2"></span>
                         <span id="star3" value="3"></span>
                         <span id="star4" value="4"></span>
                         <span id="star5" value="5"></span>
                     </div>
-                    <textarea id="commentSend" type="text" placeholder="Leave your comments..."></textarea>
-                    <div class="submit-comment">
+                    <textarea id="comment" type="text" placeholder="Leave your comments..."></textarea>
+                    <div class="submit">
                         <button>Submit</button>
                     </div>
                 </div>
             </div>
-            <div class="details">
+            <div id="infoArea">
                 <div class="topic">
                     <span>Geography</span>
                     <div>Area: <span id="area"></span></div>
@@ -227,8 +226,8 @@
                 </div>
             </div>
         </div>
-        <div class="globe">
-            <h3 class="infoHead" id="name">Earth</h3>
+        <div id="earthInfoArea">
+            <h3 class="infoHead">Earth</h3>
             <div class="topic">
                 <span>Geography</span>
                 <div>Surface: <span>510.072 million sq km</span></div>
@@ -265,7 +264,7 @@
                 <div>
                     Largest City:
                     <span>Tokyo (Japan) - 37,393,000; New Delhi (India) -
-                        30,291,000; Shanghai (China) - 27,058,000; Sao Paulo
+                        30,291,000; Shanghai (China) - 27,058,000; São Paulo
                         (Brazil) - 22,043,000; Mexico City (Mexico) -
                         21,782,000; Dhaka (Bangladesh) - 21,006,000; Cairo
                         (Egypt) - 20,901,000; Beijing (China) - 20,463,000;
@@ -292,6 +291,8 @@
     <script src="https://unpkg.com/versor"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/index.js"></script>
     <script src="js/login.js"></script>
     <script src="js/wishlist.js"></script>

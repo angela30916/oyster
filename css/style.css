@@ -19,45 +19,8 @@ header {
     font-size: 16px;
 }
 
-.nav a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.nav:hover {
-    cursor: pointer;
-    color: #edae49 !important;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 10px;
-    background-color: #003d5b;
-}
-
 svg {
     display: inline-block;
-}
-
-@keyframes fadein {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-#earth,
-.infoBox,
-header {
-    animation: fadein ease 3s;
-}
-
-#earth {
-    min-height: -webkit-fill-available;
 }
 
 span {
@@ -89,17 +52,83 @@ h3 {
     font-weight: bold;
 }
 
-.infoHead {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #fff;
-    display: flex;
-    justify-content: space-between;
-}
-
 .nav {
     margin-right: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav:hover {
+    cursor: pointer;
+    color: #edae49 !important;
+}
+
+#earth {
+    min-height: -webkit-fill-available;
+}
+
+#earth,
+.infoBox,
+header {
+    animation: fadeIn ease 3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.exploreArea {
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.exploreArea span {
+    color: #000;
+}
+
+.colorBar {
+    width: 30px;
+    height: 30px;
+}
+
+#colorBar1 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #00798c;
+}
+
+#colorBar2 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ff7979;
+}
+
+#colorBar3 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #d1d1d1;
+}
+
+#colorBar4 {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #f2cc8f;
 }
 
 .signArea {
@@ -197,8 +226,12 @@ label[for='rememberMe']:before {
     left: 227px;
 }
 
-#signIn,
-#signUp {
+.rememberMe {
+    display: inline-block;
+}
+
+#signInBtn,
+#signUpBtn {
     font-weight: bold;
     width: 170px;
     margin: 10px 5px;
@@ -215,20 +248,10 @@ label[for='rememberMe']:before {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
-#signIn:hover,
-#signUp:hover {
+#signInBtn:hover,
+#signUpBtn:hover {
     color: #000;
     background-color: #edae49;
-}
-
-.switchArea > span {
-    color: #444;
-}
-
-.switchArea > a {
-    font-weight: bold;
-    color: #003d5b;
-    cursor: pointer;
 }
 
 .bridge > span {
@@ -277,6 +300,16 @@ label[for='rememberMe']:before {
     vertical-align: middle;
 }
 
+.switchSignArea > span {
+    color: #444;
+}
+
+.switchSignArea > a {
+    font-weight: bold;
+    color: #003d5b;
+    cursor: pointer;
+}
+
 .infoBox {
     display: inline-block;
     position: fixed;
@@ -310,16 +343,17 @@ label[for='rememberMe']:before {
     }
 }
 
-.topic > span {
-    color: #edae49;
-    font-weight: bolder;
-    border: 1px solid;
-    padding: 1px 3px;
-    line-height: 2em;
-}
-
 .choices {
     color: #444;
+}
+
+.infoHead {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    justify-content: space-between;
 }
 
 .btnGroup {
@@ -331,13 +365,43 @@ label[for='rememberMe']:before {
     width: 40px;
     fill: #fff;
 }
+
 .btnGroup svg path {
     cursor: pointer;
 }
 
-#countryImg {
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltipText {
+    visibility: hidden;
     width: 100px;
-    margin-top: 20px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 100;
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip .tooltipText::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.tooltip:hover .tooltipText {
+    visibility: visible;
 }
 
 .flag {
@@ -346,181 +410,40 @@ label[for='rememberMe']:before {
     padding-bottom: 15px;
 }
 
-.exploreArea {
-    position: absolute;
-    bottom: 50px;
-    right: 30px;
-    background: #fff;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-.colorBar {
-    width: 30px;
-    height: 30px;
-}
-
-.exploreArea span {
-    color: #000;
-}
-
-.colorBar1 {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #00798c;
-}
-
-.colorBar2 {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #ff7979;
-}
-
-.colorBar3 {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #d1d1d1;
-}
-
-.colorBar4 {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #f2cc8f;
-}
-
-::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-}
-::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
-}
-
-#btn {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-#btn span {
-    cursor: pointer;
-    color: #fff;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-}
-
-#btn .active {
-    color: #edae49;
-    border-bottom: 5px solid #edae49;
-}
-
-.comment {
-    border: 1px solid #eee;
-    min-height: 120px;
-    margin: 15px 0;
-    padding: 10px;
-    background-color: #eee;
-    color: #000;
-}
-
-.comment span {
-    color: inherit;
-    word-break: break-word;
-    display: block;
-    white-space: pre-wrap;
-    overflow: hidden;
-}
-
-.commentStar svg {
-    width: 15px;
-}
-
-.input textarea {
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 16px;
-    resize: none;
-    height: 70px;
-    width: -webkit-fill-available;
-    box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
-}
-
-.submit-comment button {
-    width: 60px;
-    border: 0;
-    outline: none;
-    border-radius: 4px;
-    background-color: #3f3a3a;
-    color: #fff;
-    margin-left: auto;
-    display: block;
-    line-height: 30px;
-    font-size: 15px;
-    cursor: pointer;
-    transition-duration: 0.1s;
-}
-
-.submit-comment button:hover {
-    color: #000;
-    background-color: #979797;
-}
-
-#noComment {
-    margin-top: 30px;
-}
-
-.starsSend {
-    display: inline-block;
+#countryImg {
+    width: 100px;
     margin-top: 20px;
-}
-
-.starsSend > span:before {
-    content: '\2605';
-    font-size: 30px;
-    cursor: pointer;
-    color: #fff;
-}
-
-.starsSend:hover > span:before {
-    color: #ffc108;
-}
-
-.starsSend > span:hover ~ span:before {
-    color: #fff;
 }
 
 .ave-rating {
     line-height: 20px;
 }
+
 .ave-rating .stars {
     display: inline-block;
 }
+
 .ave-rating .stars img {
     width: 20px;
 }
+
 .ave-rating .score {
     display: inline-block;
     font-size: 18px;
     margin-left: 10px;
     margin-right: 5px;
 }
+
 .ave-rating .count {
     font-size: 16px;
     display: inline-block;
 }
 
-.avestars {
+.aveStars {
     display: inline-block;
     margin-top: 20px;
 }
 
-/* stars */
 .stars-outer {
     position: relative;
     display: inline-block;
@@ -551,36 +474,101 @@ label[for='rememberMe']:before {
     color: #ffc108;
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
+#infoBoxBtn {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
 }
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 100px;
-    background-color: black;
+#infoBoxBtn span {
+    cursor: pointer;
     color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 100;
-    top: -5px;
-    right: 110%;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-.tooltip .tooltiptext::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent black;
+#infoBoxBtn .active {
+    color: #edae49;
+    border-bottom: 5px solid #edae49;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+.commentInput textarea {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    height: 70px;
+    width: -webkit-fill-available;
+    box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.stars {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.stars > span:before {
+    content: '\2605';
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.stars:hover > span:before {
+    color: #ffc108;
+}
+
+.stars > span:hover ~ span:before {
+    color: #fff;
+}
+
+.submit button {
+    width: 60px;
+    border: 0;
+    outline: none;
+    border-radius: 4px;
+    background-color: #3f3a3a;
+    color: #fff;
+    margin-left: auto;
+    display: block;
+    line-height: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    transition-duration: 0.1s;
+}
+
+.submit button:hover {
+    color: #000;
+    background-color: #979797;
+}
+
+#noComment {
+    margin-top: 30px;
+}
+
+.topic > span {
+    color: #edae49;
+    font-weight: bolder;
+    border: 1px solid;
+    padding: 1px 3px;
+    line-height: 2em;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #003d5b;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
 }
