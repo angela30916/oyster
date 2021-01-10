@@ -547,6 +547,27 @@ label[for='rememberMe']:before {
     margin-top: 30px;
 }
 
+.comment {
+    border: 1px solid #eee;
+    min-height: 120px;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #eee;
+    color: #000;
+}
+
+.comment span {
+    color: inherit;
+    word-break: break-word;
+    display: block;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+.commentStar svg {
+    width: 15px;
+}
+
 .topic > span {
     color: #edae49;
     font-weight: bolder;
