@@ -4,8 +4,9 @@
 An interactive world map SPA mainly using `D3.js`, allowing users to explore the information and comments of each country by clicking, zooming and dragging.
 * Implemented with `d3-geo API` to build a spherical shape map.
 * Rendered country shapes and borders by `TopoJSON`.
-* Combined `d3.drag` and `d3.zoom` to allow dragging within the zoomable earth SVG; initiated search functionality by `Chioces.js`.
-* Collected country data from The World Factbook produced by CIA; cleansed data for utilization.
+* Combined `d3.drag` and `d3.zoom` to allow dragging within the zoomable earth SVG.
+* Initiated search functionality by `Chioces.js`.
+* Collected auto-update country data from [The World Factbook](https://www.cia.gov/the-world-factbook/) produced by CIA.
 * Applied rating system and wishlist functionality by `Cloud Firestore` to get realtime updates.
 
 
@@ -25,8 +26,10 @@ https://oyster-anping.web.app/
 * Cloud Firestore
 * Firebase Authentication
 ### Packages
-* 
-* 
+* TopoJSON
+* Versor
+* Choices.js
+* SweetAlert2
 ### Tools
 * Version Control: Git, GitHub
 * Agile Planning Development: Trello (Scrum)
@@ -36,6 +39,7 @@ https://oyster-anping.web.app/
 ## Features
 ## Future Features
 * Implement infografic animations in information box with D3.
+* Svelt.js
 
 
 
