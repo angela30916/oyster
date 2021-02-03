@@ -162,7 +162,7 @@ function renderCountryInfo(code, continent, name) {
 function getCountryImg(code) {
     get('#countryImg').setAttribute(
         'src',
-        `https://factbook.github.io/images/flags/${code}.png`
+        `https://factbook.github.io/media/flags/${code}.png`
     )
 }
 
