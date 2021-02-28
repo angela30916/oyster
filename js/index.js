@@ -197,6 +197,11 @@ function getCountryInfo(code, continent, name) {
             countryInfoArea.style.display = 'block'
             resetInfoArea()
 
+            const GDP =
+                countryInfo.Economy?.['Real GDP (purchasing power parity)']
+            const unemployment = countryInfo.Economy?.['Unemployment rate']
+            const trade = countryInfo.Economy?.['Current account balance']
+
             const contentList = [
                 name,
                 countryInfo.Government?.Capital?.name?.text?.split(
@@ -215,18 +220,14 @@ function getCountryInfo(code, continent, name) {
                 countryInfo['People and Society']?.Urbanization?.[
                     'urban population'
                 ]?.text ?? 'null',
-                countryInfo?.Economy?.[
-                    'GDP (purchasing power parity)'
-                ]?.text?.split('/')[0] ?? 'null',
-                countryInfo.Economy?.['Unemployment rate']?.text?.split(
+                GDP?.[Object.keys(GDP)[0]]?.text?.split('/')[0] ?? 'null',
+                unemployment?.[Object.keys(unemployment)[0]]?.text?.split(
                     '/'
                 )[0] ?? 'null',
-                countryInfo.Economy?.['Exchange rates']?.text?.split(
-                    ' per'
-                )[0] ?? 'null',
-                countryInfo.Economy?.['Current account balance']?.text?.split(
-                    ' /'
-                )[0] ?? 'null',
+                countryInfo.Economy?.['Exchange rates']?.[
+                    'currency'
+                ]?.text?.split(' per')[0] ?? 'null',
+                trade?.[Object.keys(trade)[0]]?.text?.split(' /')[0] ?? 'null',
                 countryInfo.Government?.Capital?.[
                     'time difference'
                 ]?.text?.split(' (')[0] ?? 'null',
